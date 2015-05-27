@@ -1,0 +1,64 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @giveaway.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @giveaway.description %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @giveaway.location %>
+</p>
+
+<%= form_for(@request) do |f| %>
+  <% if @request.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@request.errors.count, "error") %> prohibited this request from being saved:</h2>
+
+      <ul>
+      <% @request.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<p>
+  <strong>Trees Available:</strong>
+  <br>
+  <% @giveaway.trees.each do |tree| %>
+  <% input_id = "request_trees_" + tree.id.to_s %>
+  <%= radio_button_tag("request[trees]", tree.id) %>
+  <%= label_tag(input_id, tree.name) %>
+  <div> <%= tree.stock %> Remaining </div>
+  <p><%= tree.description %></p>
+  <br>
+  <% end %>
+</p>
+
+  <div class="field">
+    <%= f.label :first_name %><br>
+    <%= f.text_field :first_name %>
+  </div>
+  <div class="field">
+    <%= f.label :last_name %><br>
+    <%= f.text_field :last_name %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
+
+<%= link_to 'Edit', edit_giveaway_path(@giveaway) %> |
+<%= link_to 'Back', giveaways_path %>
