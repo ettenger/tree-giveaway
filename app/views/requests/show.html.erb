@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @request.first_name %>
+</p>
+
+<p>
+  <strong>You got a:</strong>
+  <%= @request.tree.name %>
+</p>
+
+<%= link_to 'Back', giveaway_path(@request.giveaway) %>

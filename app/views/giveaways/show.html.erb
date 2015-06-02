@@ -32,15 +32,15 @@
   <strong>Trees Available:</strong>
   <br>
   <% @giveaway.trees.each do |tree| %>
-  <% input_id = "request_trees_" + tree.id.to_s %>
-  <%= radio_button_tag("request[trees]", tree.id) %>
+  <% input_id = "request_tree_" + tree.id.to_s %>
+  <%= radio_button_tag("request[tree]", tree.id) %>
   <%= label_tag(input_id, tree.name) %>
   <div> <%= tree.stock %> Remaining </div>
   <p><%= tree.description %></p>
   <br>
   <% end %>
 </p>
-
+  <%= f.hidden_field :giveaway_id, :value => @giveaway.id %>
   <div class="field">
     <%= f.label :first_name %><br>
     <%= f.text_field :first_name %>

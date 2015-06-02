@@ -1,4 +1,4 @@
 class Request < ActiveRecord::Base
-  has_one :tree
-  has_one :giveaway
+  belongs_to :tree
+  belongs_to :giveaway
 end
