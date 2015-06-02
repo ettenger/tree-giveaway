@@ -33,9 +33,17 @@
   <br>
   <% @giveaway.trees.each do |tree| %>
   <% input_id = "request_tree_" + tree.id.to_s %>
-  <%= radio_button_tag("request[tree]", tree.id) %>
-  <%= label_tag(input_id, tree.name) %>
-  <div> <%= tree.stock %> Remaining </div>
+
+  <% if tree.stock > 0 %>
+    <%= radio_button_tag("request[tree]", tree.id) %>
+    <%= label_tag(input_id, tree.name) %>
+    <div> <%= tree.stock %> Remaining </div>
+  <% else %>
+    <%= radio_button_tag("request[tree]", tree.id, false, :disabled => true) %>
+    <%= label_tag(input_id, tree.name) %>
+    <div class="out-of-stock"> OUT OF STOCK </div>
+  <% end %>
+
   <p><%= tree.description %></p>
   <br>
   <% end %>
