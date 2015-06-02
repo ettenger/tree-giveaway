@@ -41,6 +41,7 @@
   <% end %>
 </p>
   <%= f.hidden_field :giveaway_id, :value => @giveaway.id %>
+  <%= f.hidden_field :session_id, :value => session.id %>
   <div class="field">
     <%= f.label :first_name %><br>
     <%= f.text_field :first_name %>
