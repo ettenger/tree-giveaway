@@ -6,6 +6,10 @@ class RequestsController < ApplicationController
 
     respond_to do |format|
       if @request.save
+        @tree = @request.tree
+        @tree.stock -= 1
+        @tree.save
+
         format.html { redirect_to @request, notice: 'Your tree has been reserved.' }
         format.json { render :show, status: :created, location: @request }
       else
