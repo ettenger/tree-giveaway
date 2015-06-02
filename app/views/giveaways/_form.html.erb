@@ -28,7 +28,12 @@
     <%= f.datetime_select :time %>
   </div>
   <div class="field">
-    <%= f.collection_check_boxes :trees, @trees, :id, :name %>
+    <% @trees.each do |tree| %>
+      <% input_id = "giveaway_trees_" + tree.id.to_s %>
+      <% matching_tree = @giveaway.trees.include? tree %>
+      <%= check_box_tag("giveaway[trees][]", tree.id, checked = matching_tree) %>
+      <%= label_tag(input_id, tree.name) %>
+    <% end %>
   </div>  
   <div class="actions">
     <%= f.submit %>
