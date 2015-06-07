@@ -15,6 +15,7 @@ gem 'coffee-rails', '~> 4.1.0'
 # gem 'therubyracer', platforms: :ruby
 
 gem 'client_side_validations', github: "DavyJonesLocker/client_side_validations", branch: "4-2-stable"
+gem 'validates_email_format_of'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

@@ -19,9 +19,22 @@ class RequestsController < ApplicationController
   end
 
   def destroy
+    @request = Request.find(params[:id])
+    
+    respond_to do |format|
+      if @request.destroy
+        @tree = @request.tree
+        @tree.stock += 1
+        @tree.save
+
+        format.html { redirect_to giveaways_path, notice: 'Request has been deleted' }
+      end
+    end
   end
 
   def index
+    @giveaway = Giveaway.find(params[:id])
+    @requests = Request.where(giveaway_id: @giveaway.id)
   end
 
   def show

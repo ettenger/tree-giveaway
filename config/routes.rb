@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
 #  get 'request/destroy'
 
-#  get 'request/index'
+  get 'requests/index/:id', to: 'requests#index'
 
 #  get 'request/show'
 

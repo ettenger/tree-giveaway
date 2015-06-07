@@ -1,2 +1,30 @@
-<h1>Request#index</h1>
-<p>Find me in app/views/request/index.html.erb</p>
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Requests for <%= @giveaway.name %></h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Tree</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @requests.each do |request| %>
+      <tr>
+        <td><%= request.first_name + " " + request.last_name %></td>
+        <td><%= request.email %></td>
+        <td><%= request.tree.name %></td>
+        <td><%= link_to 'Show', request %></td>
+        <td><%= link_to 'Destroy', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Back', giveaways_path %>
