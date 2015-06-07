@@ -15,7 +15,7 @@
   <%= @giveaway.location %>
 </p>
 
-<%= form_for(@request, validate: true) do |f| %>
+<%= form_for(@request, validate: true, html: { onsubmit: "return validateRadio(this);" } ) do |f| %>
   <% if @request.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@request.errors.count, "error") %> prohibited this request from being saved:</h2>
@@ -67,7 +67,19 @@
   </div>
 <% end %>
 
+<script>
+function validateRadio(f){
 
+var radioButtons = f.elements['request[tree]'];
+var selected = false;
+for(var i = 0;i< radioButtons.length;i++){
+ selected = radioButtons[i].checked;
+ }
+if(!selected)
+ alert("Please select a tree");
+return selected ;
+}
+</script>
 
 <%= link_to 'Edit', edit_giveaway_path(@giveaway) %> |
 <%= link_to 'Back', giveaways_path %>
