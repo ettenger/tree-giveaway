@@ -73,7 +73,9 @@ function validateRadio(f){
 var radioButtons = f.elements['request[tree]'];
 var selected = false;
 for(var i = 0;i< radioButtons.length;i++){
- selected = radioButtons[i].checked;
+ if(radioButtons[i].checked) {
+    selected = true;
+  }
  }
 if(!selected)
  alert("Please select a tree");
