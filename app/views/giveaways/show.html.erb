@@ -15,7 +15,7 @@
   <%= @giveaway.location %>
 </p>
 
-<%= form_for(@request) do |f| %>
+<%= form_for(@request, validate: true) do |f| %>
   <% if @request.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@request.errors.count, "error") %> prohibited this request from being saved:</h2>
@@ -60,7 +60,7 @@
   </div>
   <div class="field">
     <%= f.label :email %><br>
-    <%= f.text_field :email %>
+    <%= f.email_field :email %>
   </div>
   <div class="actions">
     <%= f.submit %>
