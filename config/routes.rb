@@ -4,6 +4,10 @@ Rails.application.routes.draw do
 #  get 'request/destroy'
 
   get 'requests/index/:id', to: 'requests#index'
+  get 'login', to: 'sus#login', as: :login
+  post 'login', to: 'sus#update'
+  get 'logout', to: 'sus#clear', as: :logout
+  get 'su/home', to: 'sus#home', as: :su_home
 
 #  get 'request/show'
 

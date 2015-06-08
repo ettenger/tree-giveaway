@@ -1,4 +1,5 @@
 class TreesController < ApplicationController
+  before_filter :auth
   before_action :set_tree, only: [:show, :edit, :update, :destroy]
 
   # GET /trees
@@ -71,4 +72,11 @@ class TreesController < ApplicationController
     def tree_params
       params.require(:tree).permit(:name, :description, :stock)
     end
+  
+  def auth
+    unless session.id == Su.find(1).session_id
+      render :text => "You must be logged in to see this page", :status => 403
+    end
+  end
+
 end

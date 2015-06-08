@@ -1,0 +1,6 @@
+class SusController < ApplicationController
+  def login
+    @su = Su.find(1)
+  end
+
+end

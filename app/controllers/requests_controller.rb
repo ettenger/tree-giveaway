@@ -1,6 +1,7 @@
 class RequestsController < ApplicationController
   before_filter :check_session, :only => [:show]
-  
+  before_filter :auth, :only => [:destroy, :index]  
+
   def create
     @request = Request.new(request_params_with_tree)
 
@@ -61,4 +62,9 @@ class RequestsController < ApplicationController
     end
   end
 
+  def auth
+    unless session.id == Su.find(1).session_id
+      render :text => "You must be logged in to see this page", :status => 403
+    end
+  end
 end

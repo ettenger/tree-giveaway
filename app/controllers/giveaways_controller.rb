@@ -1,4 +1,5 @@
 class GiveawaysController < ApplicationController
+  before_filter :auth, only: [:index, :new, :edit, :update, :destroy, :create]
   before_action :set_giveaway, only: [:show, :edit, :update, :destroy]
 
   # GET /giveaways
@@ -83,4 +84,9 @@ class GiveawaysController < ApplicationController
       gp
     end
 
+  def auth
+    unless session.id == Su.find(1).session_id
+      render :text => "You must be logged in to see this page", :status => 403
+    end
+  end
 end
