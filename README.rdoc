@@ -4,6 +4,7 @@
 
 * Create super-user password in the rails console:
 > Su.new(password:"samplepwd").save
+
 Verify the new Su has :id == 1.
 
 * Login to the administrative side of the app at /login
