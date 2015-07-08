@@ -3,6 +3,14 @@ class RequestsController < ApplicationController
   before_filter :auth, :only => [:destroy, :index]  
 
   def create
+    unless request_params[:different_address]
+      request_params[:planting_street1] = request_params[:mailing_street1]
+      request_params[:planting_street2] = request_params[:mailing_street2]
+      request_params[:planting_city] = request_params[:mailing_city]
+      request_params[:planting_state] = request_params[:mailing_state]
+      request_params[:planting_zip] = request_params[:mailing_zip]
+    end
+
     @request = Request.new(request_params_with_tree)
 
     respond_to do |format|
@@ -45,7 +53,10 @@ class RequestsController < ApplicationController
   private
 
   def request_params
-    params.require(:request).permit(:first_name, :last_name, :email, :tree, :giveaway_id, :session_id)
+    params.require(:request).permit(:first_name, :last_name, :email, :phone_number, 
+                                    :mailing_street1, :mailing_street2, :mailing_city, :mailing_state, :mailing_zip,
+                                    :planting_street1, :planting_street2, :planting_city, :planting_state, :planting_zip,
+                                    :different_address, :referral, :tree, :giveaway_id, :session_id)
   end
 
   def request_params_with_tree

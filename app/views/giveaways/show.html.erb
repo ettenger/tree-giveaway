@@ -1,21 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @giveaway.name %>
-</p>
+<h2><%= @giveaway.name %></h2>
+<h3><%= @giveaway.time.strftime("%A, %B %d, %Y, %I:%M %P") %></h3>
+<h3><%= @giveaway.location %></h3>
+<p><%= @giveaway.description %></p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @giveaway.description %>
-</p>
 
-<p>
-  <strong>Location:</strong>
-  <%= @giveaway.location %>
-</p>
-
-<%= simple_form_for(@request, validate: true, html: { onsubmit: "return validateRadio(this);" } ) do |f| %>
+<%= simple_form_for(@request,validate: true,  html: { onsubmit: "return validateRadio(this);" } ) do |f| %>
   <% if @request.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@request.errors.count, "error") %> prohibited this request from being saved:</h2>
@@ -28,8 +19,91 @@
     </div>
   <% end %>
 
+
+  <%= f.input :giveaway_id, as: :hidden, input_html: { value: @giveaway.id } %>
+  <%= f.input :session_id, as: :hidden, input_html: { value: session.id } %>
+  
+  <table class="contact-info">
+    <tbody id="contact">
+    <tr>
+      <td><%= f.label :first_name %></td>
+      <td><%= f.input :first_name, label: false %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :last_name %></td>
+      <td><%= f.input :last_name, label: false %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :email %></td>
+      <td><%= f.input :email, as: :email, label: false %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :phone_number %></td>
+      <td><%= f.input :phone_number, as: :tel, label: false %></td>
+    </tr>
+    <tr><td><br></td><td></td></tr>
+    </tbody>
+    <tbody id="mailing-address">
+    <tr>
+      <td><strong>Mailing Address</strong></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><%= f.label :mailing_street1, label: "Address" %></td>
+      <td><%= f.input :mailing_street1, label: false %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :mailing_street2, label: "Address (line 2)" %></td>
+      <td><%= f.input :mailing_street2, label: false %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :mailing_city, label: "City" %></td>
+      <td><%= f.input :mailing_city, label: false %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :mailing_state, label: "State" %></td>
+      <td><%= f.input :mailing_state, label: false %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :mailing_zip, label: "Zip code" %></td>
+      <td><%= f.input :mailing_zip, label: false %></td>
+    </tr>
+    <tr>
+      <td colspan=2><%= f.input :different_address,
+			label: " Check this box if you are planting somewhere other than your mailing address",
+			input_html: { onclick: "$( '#plantingAddress' ).toggleClass('hidden');" } %></td>
+    </tr>
+    <tr><td><br></td><td></td></tr>
+    </tbody>
+    <tbody id="plantingAddress" class="hidden">
+    <tr>
+      <td><strong>Planting Address</strong></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><%= f.label :planting_street1, label: "Address" %></td>
+      <td><%= f.input :planting_street1, label: false, validate: false %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :planting_street2, label: "Address (line 2)" %></td>
+      <td><%= f.input :planting_street2, label: false %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :planting_city, label: "City" %></td>
+      <td><%= f.input :planting_city, label: false, validate: false %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :planting_state, label: "State" %></td>
+      <td><%= f.input :planting_state, label: false, validate: false %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :planting_zip, label: "Zip code" %></td>
+      <td><%= f.input :planting_zip, label: false, validate: false %></td>
+    </tr>
+    </tbody>
+  </table>
 <p>
-  <strong>Trees Available:</strong>
+  <strong>Select a tree:</strong>
   <br>
   <% @giveaway.trees.each do |tree| %>
   <% input_id = "request_tree_" + tree.id.to_s %>
@@ -48,12 +122,10 @@
   <br>
   <% end %>
 </p>
-  <%= f.input :giveaway_id, as: :hidden, input_html: { value: @giveaway.id } %>
-  <%= f.input :session_id, as: :hidden, input_html: { value: session.id } %>
-  <%= f.input :first_name %><br>
-  <%= f.input :last_name %><br>
-  <%= f.input :email, as: :email %><br>
-  <%= f.button :submit %>
+  <%= f.label :referral, label: "How did you hear about this tree giveaway?" %><br>
+  <%= f.input :referral, label: false %>
+  <br>
+  <%= f.button :submit, "Request your tree" %>
 <% end %>
 
 <script>

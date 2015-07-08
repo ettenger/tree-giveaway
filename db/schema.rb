@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150608001135) do
+ActiveRecord::Schema.define(version: 20150708162444) do
 
   create_table "giveaways", force: :cascade do |t|
     t.string   "name"
@@ -33,9 +33,22 @@ ActiveRecord::Schema.define(version: 20150608001135) do
     t.string   "email"
     t.integer  "tree_id"
     t.integer  "giveaway_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.string   "session_id"
+    t.string   "phone_number"
+    t.string   "mailing_street1"
+    t.string   "mailing_street2"
+    t.string   "mailing_city"
+    t.string   "mailing_state"
+    t.string   "mailing_zip"
+    t.string   "planting_street1"
+    t.string   "planting_street2"
+    t.string   "planting_city"
+    t.string   "planting_state"
+    t.string   "planting_zip"
+    t.boolean  "different_address"
+    t.text     "referral"
   end
 
   create_table "sus", force: :cascade do |t|
