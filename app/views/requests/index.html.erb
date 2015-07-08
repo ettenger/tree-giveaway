@@ -22,10 +22,8 @@
         <td><%= request.email %></td>
         <td><%= request.tree.name %></td>
         <td><%= request.phone_number %></td>
-        <td><%= "#{request.mailing_street1} #{request.mailing_street2}" %><br>
-	    <%= "#{request.mailing_city}, #{request.mailing_state} #{request.mailing_zip}" %></td>
-        <td><%= "#{request.planting_street1}  #{request.planting_street2}" %><br>
-	    <%= "#{request.planting_city}, #{ request.planting_state} #{request.planting_zip}" %></td>
+        <td><%= simple_format(request.mailing_address) %></td>
+        <td><%= simple_format(request.planting_address) %></td>
         <td><%= link_to 'Show', request %></td>
         <td><%= link_to 'Destroy', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
