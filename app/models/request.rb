@@ -10,4 +10,13 @@ class Request < ActiveRecord::Base
   validates :email,
             presence: true,
             :email_format => { :message => "Invalid email address" }
+
+  def self.to_csv(options = {})
+    CSV.generate(options) do |csv|
+      csv << column_names
+      all.each do |request|
+        csv << request.attributes.values_at(*column_names)
+      end
+    end
+end
 end

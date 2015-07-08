@@ -8,6 +8,9 @@
       <th>Name</th>
       <th>Email</th>
       <th>Tree</th>
+      <th>Phone</th>
+      <th>Mailing Address</th>
+      <th>Planting Address</th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -18,6 +21,11 @@
         <td><%= request.first_name + " " + request.last_name %></td>
         <td><%= request.email %></td>
         <td><%= request.tree.name %></td>
+        <td><%= request.phone_number %></td>
+        <td><%= "#{request.mailing_street1} #{request.mailing_street2}" %><br>
+	    <%= "#{request.mailing_city}, #{request.mailing_state} #{request.mailing_zip}" %></td>
+        <td><%= "#{request.planting_street1}  #{request.planting_street2}" %><br>
+	    <%= "#{request.planting_city}, #{ request.planting_state} #{request.planting_zip}" %></td>
         <td><%= link_to 'Show', request %></td>
         <td><%= link_to 'Destroy', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
@@ -27,4 +35,5 @@
 
 <br>
 
+<p>Download as <%= link_to 'CSV', controller: "requests", action: "index", id: @giveaway.id, format: "csv" %></p>
 <%= link_to 'Back', giveaways_path %>
