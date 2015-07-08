@@ -15,7 +15,7 @@
   <%= @giveaway.location %>
 </p>
 
-<%= form_for(@request, validate: true, html: { onsubmit: "return validateRadio(this);" } ) do |f| %>
+<%= simple_form_for(@request, validate: true, html: { onsubmit: "return validateRadio(this);" } ) do |f| %>
   <% if @request.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@request.errors.count, "error") %> prohibited this request from being saved:</h2>
@@ -48,23 +48,12 @@
   <br>
   <% end %>
 </p>
-  <%= f.hidden_field :giveaway_id, :value => @giveaway.id %>
-  <%= f.hidden_field :session_id, :value => session.id %>
-  <div class="field">
-    <%= f.label :first_name %><br>
-    <%= f.text_field :first_name %>
-  </div>
-  <div class="field">
-    <%= f.label :last_name %><br>
-    <%= f.text_field :last_name %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.email_field :email %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= f.input :giveaway_id, as: :hidden, input_html: { value: @giveaway.id } %>
+  <%= f.input :session_id, as: :hidden, input_html: { value: session.id } %>
+  <%= f.input :first_name %><br>
+  <%= f.input :last_name %><br>
+  <%= f.input :email, as: :email %><br>
+  <%= f.button :submit %>
 <% end %>
 
 <script>
