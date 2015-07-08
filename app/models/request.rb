@@ -10,6 +10,17 @@ class Request < ActiveRecord::Base
   validates :email,
             presence: true,
             :email_format => { :message => "Invalid email address" }
+  def name
+    "#{self.first_name} #{self.last_name}"
+  end
+
+  def tree_name
+    self.tree.name
+  end
+  
+  def giveaway_name
+    self.giveaway.name
+  end
 
   def mailing_address
     "#{self.mailing_street1} #{self.mailing_street2}\n#{self.mailing_city}, #{self.mailing_state} #{self.mailing_zip}"
@@ -21,9 +32,12 @@ class Request < ActiveRecord::Base
 
   def self.to_csv(options = {})
     CSV.generate(options) do |csv|
-      csv << column_names
+      columns = %w(name email phone_number tree_name mailing_address planting_address giveaway_name referral)
+      methods = columns.map(&:to_sym)
+      csv << columns
       all.each do |request|
-        csv << request.attributes.values_at(*column_names)
+        col_vals = methods.each.map { |method| method.to_proc.call(request) }
+        csv << col_vals.map { |value| value.gsub(/\n/, " ") if value}
       end
     end
   end
