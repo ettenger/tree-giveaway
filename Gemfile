@@ -17,6 +17,7 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'client_side_validations', github: "DavyJonesLocker/client_side_validations", branch: "4-2-stable"
 gem 'validates_email_format_of'
 gem 'simple_form'
+gem 'client_side_validations-simple_form', github: 'DavyJonesLocker/client_side_validations-simple_form'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
