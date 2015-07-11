@@ -11,6 +11,7 @@ class GiveawaysController < ApplicationController
   # GET /giveaways/1
   # GET /giveaways/1.json
   def show
+    session[:init] = true
     @request = Request.new
   end
 

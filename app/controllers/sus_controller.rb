@@ -5,6 +5,7 @@ class SusController < ApplicationController
   end
   
   def login
+    session[:init] = true
     @su = Su.new
   end
 
