@@ -17,11 +17,11 @@
   </div>
   <div class="field">
     <%= f.label :description %><br>
-    <%= f.text_area :description %>
+    <%= f.text_area :description, cols: 60, rows: 10 %>
   </div>
   <div class="field">
     <%= f.label :stock %><br>
-    <%= f.number_field :stock %>
+    <%= f.number_field :stock%>
   </div>
   <div class="actions">
     <%= f.submit %>
