@@ -1,0 +1,8 @@
+<%= @request.name %> has reserved a <%= @request.tree.name %>.
+To be planted at:
+ <%= @request.planting_address %>
+
+Can be picked up at:
+<%= @request.giveaway.name %>
+<%= @request.giveaway.location %>
+<%= @request.giveaway.time.strftime("%A, %B %d, %Y, %I:%M %P") %>
