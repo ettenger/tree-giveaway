@@ -8,7 +8,9 @@
 Verify the new Su has :id == 1.
 
 * Add the following API keys to the development and production sections of config/secrets.yml
+
   gmail_username: 'user@gmail.com'
+
   gmail_password: 'yourpassword'
 
 * Login to the administrative side of the app at /login

@@ -1,5 +1,5 @@
 class Mailer < ApplicationMailer
-  default from: "phillytreegiveaway@gmail.com"
+  default from: Rails.application.secrets.gmail_username
 
   def conf_email(request)
     @request = request
