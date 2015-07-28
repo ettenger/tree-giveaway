@@ -17,6 +17,14 @@ class Request < ActiveRecord::Base
   def tree_name
     self.tree.name
   end
+
+  def tree2
+    Tree.find(self.tree2_id)
+  end
+
+  def tree2_name
+    self.tree2.name
+  end
   
   def giveaway_name
     self.giveaway.name

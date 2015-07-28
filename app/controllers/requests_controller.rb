@@ -20,6 +20,12 @@ class RequestsController < ApplicationController
         @tree.stock -= 1
         @tree.save
 
+        if @request.tree2_id
+          @tree2 = @request.tree2
+          @tree2.stock -= 1
+          @tree2.save
+        end
+
         Mailer.conf_email(@request).deliver_now
         
         format.html { redirect_to @request, notice: 'Your tree has been reserved.' }
@@ -63,17 +69,31 @@ class RequestsController < ApplicationController
   private
 
   def request_params
+    giveaway_id = params.require(:request).fetch(:giveaway_id)
+    tree_ids = Giveaway.find(giveaway_id).trees.ids.map(&:to_s)
     params.require(:request).permit(:first_name, :last_name, :email, :phone_number, 
                                     :mailing_street1, :mailing_street2, :mailing_city, :mailing_state, :mailing_zip,
                                     :planting_street1, :planting_street2, :planting_city, :planting_state, :planting_zip,
-                                    :different_address, :referral, :tree, :giveaway_id, :session_id)
+                                    :different_address, :referral, :giveaway_id, :session_id, :tree => tree_ids)
   end
 
   def request_params_with_tree_and_addy
     rp = request_params
-    tree_id = rp[:tree]
-    tree_ref = Tree.find(tree_id)
-    rp[:tree] = tree_ref
+    sorted_tree_requests = rp[:tree].sort_by { |k, v| v}.reverse
+    tree_request1 = sorted_tree_requests[0]
+    tree_request2 = sorted_tree_requests[1]
+
+    tree_ref1 = Tree.find(tree_request1[0])
+    tree2_id = nil
+
+    if tree_request1[1] == "2"
+      tree2_id = tree_ref1.id
+    elsif tree_request2[1] == "1"
+      tree2_id = tree_request2[0].to_i
+    end
+
+    rp[:tree] = tree_ref1
+    rp[:tree2_id] = tree2_id
     
     unless rp[:different_address] == "1"
       rp[:planting_street1] = rp[:mailing_street1]

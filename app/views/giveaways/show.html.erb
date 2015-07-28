@@ -109,15 +109,15 @@
   <strong style="text-decoration:underline;">Select a tree:</strong>
   <br>
   <% @giveaway.trees.each do |tree| %>
-  <% input_id = "request_tree_" + tree.id.to_s %>
+  <% input_id = "request[tree][#{tree.id.to_s}]" %>
 
   <% if tree.stock > 0 %>
-    <%= radio_button_tag("request[tree]", tree.id) %>
+    <%= number_field_tag(input_id, 0, in: 0..2, size: 1) %> 
     <strong><%= label_tag(input_id, tree.name) %></strong>
     <div> <%= tree.stock %> Remaining </div>
   <% else %>
-    <%= radio_button_tag("request[tree]", tree.id, false, :disabled => true) %>
-    <%= label_tag(input_id, tree.name) %>
+   <%= number_field_tag(input_id, 0, size: 1, :disabled => true) %> 
+   <%= label_tag(input_id, tree.name) %>
     <div class="out-of-stock"> OUT OF STOCK </div>
   <% end %>
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150708162444) do
+ActiveRecord::Schema.define(version: 20150728232125) do
 
   create_table "giveaways", force: :cascade do |t|
     t.string   "name"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20150708162444) do
     t.string   "planting_zip"
     t.boolean  "different_address"
     t.text     "referral"
+    t.integer  "tree2_id"
   end
 
   create_table "sus", force: :cascade do |t|
