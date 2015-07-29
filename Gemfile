@@ -19,6 +19,9 @@ gem 'validates_email_format_of'
 gem 'simple_form'
 gem 'client_side_validations-simple_form', github: 'DavyJonesLocker/client_side_validations-simple_form'
 
+gem "paperclip", "~> 4.3"
+gem 'ckeditor'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks

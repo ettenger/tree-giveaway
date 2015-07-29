@@ -10,6 +10,9 @@ class Request < ActiveRecord::Base
   validates :email,
             presence: true,
             :email_format => { :message => "Invalid email address" }
+  validates_presence_of :different_address, :if => 'different_address.nil?'
+
+
   def name
     "#{self.first_name} #{self.last_name}"
   end

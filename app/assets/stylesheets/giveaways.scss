@@ -14,10 +14,19 @@
   border-width: 1px;
 }
 
+.separator {
+  height: 18px;
+    background: #FFF;
+}
+
 .striped tr:nth-child(even) {
-  background: #F7F7F7;
+  background: #e0e0e0;
 }
 
 .striped tr:nth-child(odd) {
   background: #FFF;
+}
+
+.tree-info:nth-of-type(even) {
+    background: #e0e0e0;
 }

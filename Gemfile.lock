@@ -57,6 +57,13 @@ GEM
     builder (3.2.2)
     byebug (5.0.0)
       columnize (= 0.9.0)
+    ckeditor (4.1.2)
+      cocaine
+      orm_adapter (~> 0.5.0)
+    climate_control (0.0.3)
+      activesupport (>= 3.0)
+    cocaine (0.5.7)
+      climate_control (>= 0.0.3, < 1.0)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -84,11 +91,19 @@ GEM
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     mime-types (2.6.1)
+    mimemagic (0.3.0)
     mini_portile (0.6.2)
     minitest (5.6.1)
     multi_json (1.11.0)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
+    orm_adapter (0.5.0)
+    paperclip (4.3.0)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      cocaine (~> 0.5.5)
+      mime-types
+      mimemagic (= 0.3.0)
     rack (1.6.1)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -162,11 +177,13 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
+  ckeditor
   client_side_validations!
   client_side_validations-simple_form!
   coffee-rails (~> 4.1.0)
   jbuilder (~> 2.0)
   jquery-rails
+  paperclip (~> 4.3)
   rails (= 4.2.1)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
@@ -177,3 +194,6 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
   validates_email_format_of
   web-console (~> 2.0)
+
+BUNDLED WITH
+   1.10.5

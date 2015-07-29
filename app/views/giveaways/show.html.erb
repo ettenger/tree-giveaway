@@ -3,9 +3,10 @@
 <table class="container" width="770" border="0" cellpadding="5" cellspacing="5">
 <tr><td width="770" valign="top">
 <h2 align="center"><%= @giveaway.name %></h2>
-<h3 align="center">The giveaway starts at: <%= @giveaway.time.strftime("%A, %B %d, %Y, %I:%M %P") %></h3>
+<h3 align="center"><%= @giveaway.time.strftime("%A, %B %d, %Y, %I:%M %P") %>
+ - <%= @giveaway.end_time.strftime("%I:%M %P") %></h3>
 <h3 align="center"><%= @giveaway.location %></h3>
-<p><%= @giveaway.description %></p>
+<%= @giveaway.description.html_safe %>
 </td></tr>
 
 <tr><td colspan="1" width="770">
@@ -72,11 +73,10 @@
       <td><%= f.input :mailing_zip, label: false %></td>
     </tr>
     <tr>
-      <td colspan=2><%= f.input :different_address,
-			label: " Check this box if you are planting somewhere other than your mailing address",
-			input_html: { onclick: "$( '#plantingAddress' ).toggleClass('hidden');" } %></td>
+      <td colspan=2><%= f.input :different_address, as: :radio_buttons,
+			label: "* Are planting somewhere other than your mailing address?" %></td>
     </tr>
-    <tr><td><br></td><td></td></tr>
+    <tr class="separator" colspan="2"></tr>
     </tbody>
     <tbody id="plantingAddress" class="hidden">
     <tr>
@@ -105,28 +105,32 @@
     </tr>
     </tbody>
   </table>
+<%= @giveaway.description2.html_safe %>
 <p>
-  <strong style="text-decoration:underline;">Select a tree:</strong>
+  <strong style="text-decoration:underline;">Select your tree(s):</strong>
   <br>
   <% @giveaway.trees.each do |tree| %>
+  <div class="tree-info">
   <% input_id = "request[tree][#{tree.id.to_s}]" %>
 
   <% if tree.stock > 0 %>
-    <%= number_field_tag(input_id, 0, in: 0..2, size: 1, class: "tree-count") %> 
+    <%= number_field_tag(input_id, 0, min: 0, max: @giveaway.max_trees, size: 1, class: "tree-count") %> 
     <strong><%= label_tag(input_id, tree.name) %></strong>
     <div> <%= tree.stock %> Remaining </div>
   <% else %>
    <%= number_field_tag(input_id, 0, size: 1, :disabled => true) %> 
-   <%= label_tag(input_id, tree.name) %>
+   <strong><%= label_tag(input_id, tree.name) %></strong>
     <div class="out-of-stock"> OUT OF STOCK </div>
   <% end %>
 
-  <p><%= tree.description %></p>
+  <%= tree.description.html_safe %>
   <br>
+  </div>
   <% end %>
 </p>
   <%= f.label :referral, label: "How did you hear about this tree giveaway?" %><br>
-  <%= f.input :referral, label: false, input_html: { style: "width: 500px" } %>
+  <% referral_options = ["Newspaper", "Flyer", "Email", "Social media (Facebook, Twitter, Instagram)", "Online search", "Blog post", "TreePhilly website", "Word of mouth", "I am a return participant", "Other"] %>
+  <%= f.input :referral, label: false, collection: referral_options, wrapper_html: { id: 'referral-div' } %>
   <br>
   <%= f.button :submit, "Request your tree" %>
 <% end %>
@@ -139,15 +143,32 @@ function validateTrees(f){
 var treeFields = f.getElementsByClassName("tree-count");
 var numTrees = 0;
 for(var i = 0;i< treeFields.length;i++){
- numTrees += parseInt(treeFields[0].value, 10)
+ numTrees += parseInt(treeFields[i].value, 10);
 }
 if(numTrees === 0) {
- alert("Please select a tree");
+ alert("Please select a tree.");
  return false;
-} else if (numTrees > 2) {
+} else if (numTrees > <%= @giveaway.max_trees %>) {
  alert("You may only request a total of two trees.");
  return false;
 } else { return true; }
 }
-</script>
 
+$("input[name='request\\[different_address\\]']").change(function() {
+    if ($("input[name='request\\[different_address\\]']:checked").val() === 'true') {
+      $( '#plantingAddress' ).removeClass('hidden');
+    } else {
+      $( '#plantingAddress' ).addClass('hidden');
+    }
+});
+
+$('#request_referral').change(function() {
+  if( $('#request_referral').val() === 'Other' ) {
+    $('#referral-div').append(" <input type='text' id='request_referral_other' name='request[referral]'>");
+    $('#request_referral').attr('name', 'ignored_referral');
+  } else {
+    $('#request_referral_other').remove();
+    $('#request_referral').attr('name', 'request[referral]');
+  }
+});
+</script>

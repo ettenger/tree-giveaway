@@ -10,22 +10,29 @@
       </ul>
     </div>
   <% end %>
-
   <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
   <div class="field">
     <%= f.label :description %><br>
-    <%= f.text_area :description, cols: 60, rows: 5 %>
+    <%= f.cktext_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :description2, "Secondary/trees description (optional)" %><br>
+    <%= f.cktext_area :description2 %>
   </div>
   <div class="field">
     <%= f.label :location %><br>
     <%= f.text_field :location %>
   </div>
   <div class="field">
-    <%= f.label :time %><br>
+    <%= f.label :time, "Start time" %><br>
     <%= f.datetime_select :time %>
+  </div>
+  <div class="field">
+    <%= f.label :end_time %><br>
+    <%= f.datetime_select :end_time %>
   </div>
   <div class="field">
     <% @trees.each do |tree| %>
@@ -34,6 +41,10 @@
       <%= check_box_tag("giveaway[trees][]", tree.id, checked = matching_tree) %>
       <%= label_tag(input_id, tree.name) %>
     <% end %>
+  </div>
+  <div class="field">
+    <%= f.label :max_trees, "Maximum number of trees per request" %><br>
+    <%= f.number_field :max_trees, value: 2, size: 1, in:1..2 %>
   </div>  
   <div class="actions">
     <%= f.submit %>
