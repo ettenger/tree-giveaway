@@ -46,6 +46,12 @@ class RequestsController < ApplicationController
         @tree.stock += 1
         @tree.save
 
+        if @request.tree2_id
+          @tree2 = @request.tree2
+          @tree2.stock += 1
+          @tree2.save
+        end
+
         format.html { redirect_to giveaways_path, notice: 'Request has been deleted' }
       end
     end
