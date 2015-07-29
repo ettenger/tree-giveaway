@@ -58,8 +58,12 @@ class RequestsController < ApplicationController
   end
 
   def index
-    @giveaway = Giveaway.find(params[:id])
-    @requests = Request.where(giveaway_id: @giveaway.id)
+    if params[:id] = "all"
+      @requests = Request.all
+    else
+      @giveaway = Giveaway.find(params[:id])
+      @requests = Request.where(giveaway_id: @giveaway.id)
+    end
 
     respond_to do |format|
       format.html
