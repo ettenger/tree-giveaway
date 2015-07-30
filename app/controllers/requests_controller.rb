@@ -58,7 +58,7 @@ class RequestsController < ApplicationController
   end
 
   def index
-    if params[:id] = "all"
+    if params[:id] == "all"
       @requests = Request.all
     else
       @giveaway = Giveaway.find(params[:id])

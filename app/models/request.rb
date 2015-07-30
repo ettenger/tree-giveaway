@@ -22,13 +22,25 @@ class Request < ActiveRecord::Base
   end
 
   def tree2
-    Tree.find(self.tree2_id)
+    Tree.find(self.tree2_id) if self.tree2_id
   end
 
   def tree2_name
-    self.tree2.name
+    self.tree2.name if self.tree2
   end
   
+  def tree_names
+    if self.tree2
+      if self.tree2 == self.tree
+        "two #{self.tree_name} trees"
+      else
+        "#{article(self.tree_name)} #{self.tree_name} and #{article(self.tree2_name)} #{self.tree2_name}"
+      end
+    else
+      "#{article(self.tree_name)} #{self.tree_name}"
+    end
+  end
+
   def giveaway_name
     self.giveaway.name
   end
@@ -43,7 +55,7 @@ class Request < ActiveRecord::Base
 
   def self.to_csv(options = {})
     CSV.generate(options) do |csv|
-      columns = %w(name email phone_number tree_name mailing_address planting_address giveaway_name referral)
+      columns = %w(name email phone_number tree_name tree2_name mailing_address planting_address giveaway_name referral)
       methods = columns.map(&:to_sym)
       csv << columns
       all.each do |request|
@@ -52,4 +64,17 @@ class Request < ActiveRecord::Base
       end
     end
   end
+
+  private
+
+  def article(following_word)
+    vowels = %w(a e i o u A E I O U)
+    if vowels.include? following_word[0,1]
+      "an"
+    else
+      "a"
+    end
+  end
+
+
 end

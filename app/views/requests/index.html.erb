@@ -8,6 +8,7 @@
       <th>Name</th>
       <th>Email</th>
       <th>Tree</th>
+      <th>Tree2</th>
       <th>Phone</th>
       <th>Mailing Address</th>
       <th>Planting Address</th>
@@ -20,7 +21,8 @@
       <tr>
         <td><%= request.name %></td>
         <td><%= request.email %></td>
-        <td><%= request.tree.name %></td>
+        <td><%= request.tree_name %></td>
+        <td><%= request.tree2_name %></td>
         <td><%= request.phone_number %></td>
         <td><%= simple_format(request.mailing_address, {}, wrapper_tag: "div") %></td>
         <td><%= simple_format(request.planting_address, {}, wrapper_tag: "div") %></td>
