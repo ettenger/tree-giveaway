@@ -25,7 +25,7 @@ class TreesController < ApplicationController
   # POST /trees
   # POST /trees.json
   def create
-    @tree = Tree.new(tree_params)
+    @tree = Tree.new(tree_params_with_original_stock)
 
     respond_to do |format|
       if @tree.save
@@ -70,7 +70,13 @@ class TreesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tree_params
-      params.require(:tree).permit(:name, :description, :stock)
+      params.require(:tree).permit(:name, :description, :stock, :original_stock, :image)
+    end
+
+    def tree_params_with_original_stock
+      tp = tree_params
+      tp[:original_stock] = tree_params[:stock]
+      tp
     end
   
   def auth

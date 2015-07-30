@@ -123,7 +123,10 @@
     <div class="out-of-stock"> OUT OF STOCK </div>
   <% end %>
 
-  <%= tree.description.html_safe %>
+  <table><tr>
+  <td><%= image_tag tree.image.url(:medium) if tree.image_file_name %></td>
+  <td><%= tree.description.html_safe %></td>
+  </tr></table>
   <br>
   </div>
   <% end %>

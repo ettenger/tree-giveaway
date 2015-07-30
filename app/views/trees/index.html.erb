@@ -6,8 +6,10 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Image</th>
       <th>Description</th>
-      <th>Stock</th>
+      <th>Remaining Stock</th>
+      <th>Original Stock</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,8 +18,10 @@
     <% @trees.each do |tree| %>
       <tr>
         <td><%= tree.name %></td>
-        <td><%= tree.description %></td>
+	<td><%= image_tag tree.image.url(:thumb) if tree.image_file_name %></td>
+        <td><%= tree.description.html_safe %></td>
         <td><%= tree.stock %></td>
+        <td><%= tree.original_stock %></td>
         <td><%= link_to 'Show', tree %></td>
         <td><%= link_to 'Edit', edit_tree_path(tree) %></td>
         <td><%= link_to 'Destroy', tree, method: :delete, data: { confirm: 'Are you sure?' } %></td>

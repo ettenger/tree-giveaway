@@ -7,13 +7,15 @@
 
 <p>
   <strong>Description:</strong>
-  <%= @tree.description %>
+  <%= @tree.description.html_safe %>
 </p>
 
 <p>
-  <strong>Stock:</strong>
-  <%= @tree.stock %>
+  <strong>Remaining Stock:</strong>  <%= @tree.stock %>
+  <br><strong>Original Stock:</strong>  <%= @tree.original_stock %>
 </p>
 
+<%= image_tag @tree.image.url(:medium) if @tree.image_file_name %>
+<br><br>
 <%= link_to 'Edit', edit_tree_path(@tree) %> |
 <%= link_to 'Back', trees_path %>
