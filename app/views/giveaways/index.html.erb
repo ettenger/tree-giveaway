@@ -18,7 +18,7 @@
     <% @giveaways.each do |giveaway| %>
       <tr>
         <td><%= giveaway.name %></td>
-        <td><%= giveaway.description %></td>
+        <td><%= giveaway.description.html_safe %></td>
         <td><%= giveaway.location %></td>
         <td><%= giveaway.time %></td>
 	<td><%= giveaway.trees.map { |tree| tree.name } %></td>

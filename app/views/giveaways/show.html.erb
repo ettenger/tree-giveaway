@@ -10,7 +10,7 @@
 </td></tr>
 
 <tr><td colspan="1" width="770">
-<%= simple_form_for(@request,validate: true,  html: { onsubmit: "return validateTrees(this);" } ) do |f| %>
+<%= simple_form_for(@request,validate: true,  html: { onsubmit: "return onClickValidate(this);" } ) do |f| %>
   <% if @request.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@request.errors.count, "error") %> prohibited this request from being saved:</h2>
@@ -105,9 +105,9 @@
     </tr>
     </tbody>
   </table>
-<%= @giveaway.description2.html_safe %>
 <p>
   <strong style="text-decoration:underline;">Select your tree(s):</strong>
+  <%= @giveaway.description2.html_safe %>
   <br>
   <% @giveaway.trees.each do |tree| %>
   <div class="tree-info">
@@ -141,6 +141,39 @@
 
 
 <script>
+
+function onClickValidate(f){
+  return validateTrees(f) && validatePhila() && validateEmail();
+}
+
+function validateEmail(){
+  if (/@/.test($( '#request_email' ))) {
+    return true;
+  } else {
+    alert("Please enter a valid email address.");
+    return false;
+  }
+}
+
+function validatePhila(){
+  var phila = /^phila/i;
+  if ($("input[name='request\\[different_address\\]']:checked").val() === 'true') {
+    if (phila.test($( '#request_planting_city').val())) {
+      return true;
+    } else {
+      alert("Planting address must be in Philadelphia.");
+      return false;
+    }
+  } else {
+    if (phila.test($( '#request_mailing_city').val())) {
+      return true;
+    } else {
+      alert("The tree(s) must be planted in Philadelphia. Please enter a planting address if planting in Philadelphia.");
+      return false;
+    }
+  }
+}
+
 function validateTrees(f){
 
 var treeFields = f.getElementsByClassName("tree-count");

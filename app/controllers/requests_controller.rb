@@ -9,7 +9,7 @@ class RequestsController < ApplicationController
     @request = Request.new(request_params_with_tree_and_addy)
 
     if Request.where(giveaway_id: @request.giveaway_id).map(&:planting_address).include? @request.planting_address
-      redirect_to Giveaway.find(request_params[:giveaway_id]), notice: "Tree not reserved. You may only request one tree per planting address."
+      redirect_to Giveaway.find(request_params[:giveaway_id]), notice: "Tree not reserved. You may only make one request per planting address."
       return
     end
       
