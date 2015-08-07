@@ -27,10 +27,10 @@
   <%= f.input :giveaway_id, as: :hidden, input_html: { value: @giveaway.id } %>
   <%= f.input :session_id, as: :hidden, input_html: { value: session.id } %>
   
-  <table class="contact-info striped" width="700">
+  <table class="contact-info striped">
     <tbody id="contact">
     <tr>
-      <td><%= f.label :first_name %></td>
+      <td width="200"><%= f.label :first_name %></td>
       <td><%= f.input :first_name, label: false %></td>
     </tr>
     <tr>
@@ -108,7 +108,7 @@
 <p>
   <strong style="text-decoration:underline;">Select your tree(s):</strong>
   <%= @giveaway.description2.html_safe %>
-  <br>
+
   <% @giveaway.trees.each do |tree| %>
   <div class="tree-info">
   <% input_id = "request[tree][#{tree.id.to_s}]" %>
@@ -123,14 +123,13 @@
     <div class="out-of-stock"> OUT OF STOCK </div>
   <% end %>
 
-  <table><tr>
+  <table class="tree-img-desc"><tr>
   <td><%= image_tag tree.image.url(:medium) if tree.image_file_name %></td>
   <td><%= tree.description.html_safe %></td>
   </tr></table>
-  <br>
   </div>
   <% end %>
-</p>
+
   <%= f.label :referral, label: "How did you hear about the TreePhilly Yard Tree Giveaways?" %><br>
   <% referral_options = ["Newspaper", "Flyer", "Email", "Social media (Facebook, Twitter, Instagram)", "Online search", "Blog post", "TreePhilly website", "Word of mouth", "I am a return participant", "Other"] %>
   <%= f.input :referral, label: false, collection: referral_options, wrapper_html: { id: 'referral-div' } %>
