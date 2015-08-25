@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+#  get 'stored_text/edit'
+
+#  get 'stored_text/update'
+
+#  get 'stored_text/update'
+
+#  get 'stored_text/edit'
+
 #  mount Ckeditor::Engine => '/ckeditor'
 #  get 'request/create'
 
@@ -15,6 +23,9 @@ Rails.application.routes.draw do
   resources :giveaways
   resources :trees
   resources :requests
+  resources :stored_text, :only => [:edit, :update]
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

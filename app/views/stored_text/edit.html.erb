@@ -1,0 +1,10 @@
+<h2>Text for <%= @stored_text.name %></h2>
+<%= form_for(@stored_text) do |f| %>
+  <div class="field">
+    <%= f.cktext_area :the_text %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

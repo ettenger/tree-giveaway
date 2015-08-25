@@ -1,6 +1,8 @@
+<p id="notice"><%= notice %></p>
 <h2>Admin Homepage</h2>
 <%= link_to 'View/edit Giveaways', giveaways_path %><br>
 <%= link_to 'View/edit Trees', trees_path %><br>
+<%= link_to 'Edit confirmation page text', edit_stored_text_path(1) %><br>
 <p>Download a <%= link_to 'CSV of all requests', controller: "requests", action: "index", id: "all", format: "csv" %></p><br>
 
 <%= link_to 'Logout', logout_path %>
