@@ -14,6 +14,35 @@
   border-width: 1px;
 }
 
+#logos {
+  display: block;
+  width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 50px;
+}
+
+#logos a:hover {
+  opacity: 0.5;
+  text-decoration: none;
+  background: none;
+}
+
+h2 {
+  padding-top: 10px;
+  margin-bottom: 10px;
+}
+
+h3 {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.top-description p {
+  padding-top: 20px;
+}
+
 .container table, p, #referral-div, label[for=request_referral], .btn {
   margin-left: 20px;
   margin-right: 20px;
@@ -55,7 +84,7 @@ img {
 
 .contact-info {
   border-collapse: collapse;
-  width: 700px;
+  width: 705px;
 }
 
 
@@ -63,7 +92,17 @@ img {
     font-size: 16px;
 }
 
+
 .contact-info input {
   padding: 2px;
   margin: 4px;
+}
+
+.referral-area {
+  padding-top: 20px;
+}
+
+.btn {
+  margin-top: 10px;
+  padding: 5px;
 }
