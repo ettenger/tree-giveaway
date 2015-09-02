@@ -74,7 +74,6 @@ class RequestsController < ApplicationController
 
   def show
     @request = Request.find(params[:id])
-    @conf_text = StoredText.find(1)
   end
 
   private

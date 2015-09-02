@@ -13,10 +13,22 @@
 <h3 align="center"><%= @giveaway.time.strftime("%A, %B %d, %Y, %I:%M %P") %>
  - <%= @giveaway.end_time.strftime("%I:%M %P") %></h3>
 <h3 align="center"><%= @giveaway.location %></h3>
+<h4 align="center">Registration will close on <%= @giveaway.close_time.strftime("%A, %B %d, %Y") %></h4>
 <div class="top-description"><%= @giveaway.description.html_safe %></div>
 </td></tr>
 
 <tr><td colspan="1" width="770">
+
+<% if @giveaway.over? %>
+<h2 align="center">This event has already taken place.</h2>
+<% elsif @giveaway.closed? %>
+<h2 align="center">Registration is closed for this event.</h2>
+<% elsif @giveaway.out_of_stock? %>
+<h2 align="center">All available trees have been reserved.</h2>
+<% elsif @giveaway.full? %>
+<h2 align="center">This event has reached its capacity.</h2>
+<% else %>
+
 <%= simple_form_for(@request,validate: true,  html: { onsubmit: "return onClickValidate(this);" } ) do |f| %>
   <% if @request.errors.any? %>
     <div id="error_explanation">
@@ -149,6 +161,7 @@
   <br>
   <%= f.button :submit, "Request your tree" %>
   </div>
+<% end %>
 <% end %>
 </td></tr></table>
 

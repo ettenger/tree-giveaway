@@ -15,11 +15,19 @@ def trees_reserved
 end
 
 def full?
-  self.trees_reserved >= self.tree_limit
+  if self.tree_limit.nil?
+    false
+  else
+    self.trees_reserved >= self.tree_limit
+  end
 end
 
 def closed?
   Time.now > self.close_time
+end
+
+def over?
+  Time.now > self.end_time
 end
 
 end
