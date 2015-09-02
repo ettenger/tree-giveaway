@@ -1,16 +1,37 @@
 <table class="container" width="770" border="0" cellpadding="5" cellspacing="5">
 <tr><td>
-  <strong><%= @request.name %></strong> has reserved 
-  <strong><%= @request.tree_names %></strong>
-</td></tr>
-<tr><td>
-  <div style="text-decoration:underline;">To be planted at:</div>
-  <%= simple_format(@request.planting_address, {}, wrapper_tag: "div") %>
-</td></tr>
-<tr><td>
-  <div style="text-decoration:underline;">Can be picked up at:</div>
-  <strong><%= @request.giveaway.name %></strong><br>
+<div id="logos">
+<%= link_to image_tag("main-logo.png"), "http://treephilly.org/", :target => "_blank" %>
+<%= link_to image_tag("parks-rec-logo.png"), "http://www.phila.gov/parksandrecreation/Pages/default.aspx", :target => "_blank" %>
+<%= link_to image_tag("fpclogo.jpg"), "http://myphillypark.org/", :target => "_blank" %>
+<%= link_to image_tag("top-wf-logo.jpg"), "https://www.wellsfargo.com/", :target => "_blank" %>
+</div>
+<strong>
+<%= Time.now.strftime("%B %-d, %Y") %><br><br><br>
+Dear <%= @request.first_name %>,</strong>
+<%= @request.giveaway.confirmation_text.html_safe %>
+<br><hr>
+<p style="text-align: center;">
+Please <a href="https://secure.qgiv.com/for/fpconserve/restriction/TreePhilly/" target="_blank" style="text-decoration: none; font-size: 1.2em; color: green; padding: 3px; border: 1px dotted black">
+Donate</a> to support TreePhilly</p>
+<hr>
+<br>
+
+<strong style="text-decoration:underline;">Registrant</strong><br>
+<%= @request.name %><br>
+<%= simple_format(@request.mailing_address, {}, wrapper_tag: "div") %>
+
+<br>
+
+  <strong style="text-decoration:underline;">Planting address</strong>
+  <%= simple_format(@request.planting_address, {}, wrapper_tag: "div") %><br>
+
+  <strong style="text-decoration:underline;">Pick-up event</strong><br>
+  <%= @request.giveaway.name %><br>
   <%= @request.giveaway.location %><br>
-  <%= @request.giveaway.time.strftime("%A, %B %d, %Y, %I:%M %P") %>
+  <%= @request.giveaway.time.strftime("%A, %B %d, %Y, %I:%M %P") %> - <%= @request.giveaway.end_time.strftime("%I:%M %P") %>
+  <br><br>
+
+  <strong>Tree(s) reserved: </strong><%= @request.tree_names %>
   </td></tr>
 </table>

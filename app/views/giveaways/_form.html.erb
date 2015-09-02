@@ -35,6 +35,11 @@
     <%= f.datetime_select :end_time %>
   </div>
   <div class="field">
+    <%= f.label :close_time, "Registration close time" %><br>
+    <%= f.datetime_select :close_time %>
+  </div>
+  <div style="text-decoration:underline;">Trees available</div>
+  <div class="field">
     <% @trees.each do |tree| %>
       <% input_id = "giveaway_trees_" + tree.id.to_s %>
       <% matching_tree = @giveaway.trees.include? tree %>
@@ -46,6 +51,14 @@
     <%= f.label :max_trees, "Maximum number of trees per request" %><br>
     <%= f.number_field :max_trees, value: 2, size: 1, in:1..2 %>
   </div>  
+  <div class="field">
+    <%= f.label :tree_limit, "Maximum number of trees that can be reserved in total (leave blank for no limit)" %><br>
+    <%= f.number_field :tree_limit %>
+  </div>
+  <div class="field">
+    <%= f.label :confirmation_text %><br>
+    <%= f.cktext_area :confirmation_text %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

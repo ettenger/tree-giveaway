@@ -4,10 +4,10 @@
 <table class="container" width="770" border="0" cellpadding="5" cellspacing="5">
 <tr><td width="770" valign="top">
 <div id="logos">
-<%= link_to image_tag("main-logo.png"), "http://treephilly.org/" %>
-<%= link_to image_tag("parks-rec-logo.png"), "http://www.phila.gov/parksandrecreation/Pages/default.aspx" %>
-<%= link_to image_tag("fpclogo.jpg"), "http://myphillypark.org/" %>
-<%= link_to image_tag("top-wf-logo.jpg"), "https://www.wellsfargo.com/" %>
+<%= link_to image_tag("main-logo.png"), "http://treephilly.org/", :target => "_blank" %>
+<%= link_to image_tag("parks-rec-logo.png"), "http://www.phila.gov/parksandrecreation/Pages/default.aspx", :target => "_blank" %>
+<%= link_to image_tag("fpclogo.jpg"), "http://myphillypark.org/", :target => "_blank" %>
+<%= link_to image_tag("top-wf-logo.jpg"), "https://www.wellsfargo.com/", :target => "_blank" %>
 </div>
 <h2 align="center"><%= @giveaway.name %></h2>
 <h3 align="center"><%= @giveaway.time.strftime("%A, %B %d, %Y, %I:%M %P") %>
@@ -84,7 +84,7 @@
     </tr>
     <tr>
       <td colspan=2><%= f.input :different_address, as: :radio_buttons,
-			label: "* Are planting somewhere other than your mailing address?" %></td>
+			label: "* Are you planting somewhere other than your mailing address?" %></td>
     </tr>
     <tr class="separator" colspan="2"></tr>
     </tbody>
