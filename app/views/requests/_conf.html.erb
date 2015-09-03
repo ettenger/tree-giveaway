@@ -29,7 +29,7 @@ Donate</a> to support TreePhilly</p>
   <strong style="text-decoration:underline;">Pick-up event</strong><br>
   <%= @request.giveaway.name %><br>
   <%= @request.giveaway.location %><br>
-  <%= @request.giveaway.time.strftime("%A, %B %d, %Y, %I:%M %P") %> - <%= @request.giveaway.end_time.strftime("%I:%M %P") %>
+  <%= @request.giveaway.time.strftime("%A, %B %d, %Y, %-I:%M %P") %> - <%= @request.giveaway.end_time.strftime("%-I:%M %P") %>
   <br><br>
 
   <strong>Tree(s) reserved: </strong><%= @request.tree_names %>

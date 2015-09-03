@@ -10,8 +10,8 @@
 <%= link_to image_tag("top-wf-logo.jpg"), "https://www.wellsfargo.com/", :target => "_blank" %>
 </div>
 <h2 align="center"><%= @giveaway.name %></h2>
-<h3 align="center"><%= @giveaway.time.strftime("%A, %B %d, %Y, %I:%M %P") %>
- - <%= @giveaway.end_time.strftime("%I:%M %P") %></h3>
+<h3 align="center"><%= @giveaway.time.strftime("%A, %B %d, %Y, %-I:%M %P") %>
+ - <%= @giveaway.end_time.strftime("%-I:%M %P") %></h3>
 <h3 align="center"><%= @giveaway.location %></h3>
 <h4 align="center">Registration will close on <%= @giveaway.close_time.strftime("%A, %B %d, %Y") %></h4>
 <div class="top-description"><%= @giveaway.description.html_safe %></div>
@@ -95,9 +95,13 @@
       <td><%= f.input :mailing_zip, label: false %></td>
     </tr>
     <tr>
-      <td colspan=2><%= f.input :different_address, as: :radio_buttons,
-			label: "* Are you planting somewhere other than your mailing address?" %></td>
+      <td colspan=2>
+	<%= f.label :different_address, label: "* Are you planting somewhere other than your mailing address?" %>
+	<br>
+	<%= f.input :different_address, as: :radio_buttons,
+			label: false %></td>
     </tr>
+ 
     <tr class="separator" colspan="2"></tr>
     </tbody>
     <tbody id="plantingAddress" class="hidden">
@@ -135,21 +139,21 @@
 
   <% @giveaway.trees.each do |tree| %>
   <div class="tree-info">
-  <% input_id = "request[tree][#{tree.id.to_s}]" %>
-
-  <% if tree.stock > 0 %>
-    <%= number_field_tag(input_id, 0, min: 0, max: @giveaway.max_trees, size: 1, class: "tree-count") %> 
-    <strong><%= label_tag(input_id, tree.name) %></strong>
-    <div> <%= tree.stock %> Remaining </div>
-  <% else %>
-   <%= number_field_tag(input_id, 0, size: 1, :disabled => true) %> 
-   <strong><%= label_tag(input_id, tree.name) %></strong>
-    <div class="out-of-stock"> OUT OF STOCK </div>
-  <% end %>
-
+    <strong><%= tree.name %></strong>  
   <table class="tree-img-desc"><tr>
   <td><%= image_tag tree.image.url(:medium) if tree.image_file_name %></td>
-  <td><%= tree.description.html_safe %></td>
+  <td>
+  <div id="add-tree">
+    <% input_id = "request[tree][#{tree.id.to_s}]" %>
+    <% if tree.stock > 0 %>
+      Qty: <%= select_tag(input_id, options_for_select(0..@giveaway.max_trees), class:"tree-count") %> 
+      <div> <%= tree.stock %> Remaining </div>
+    <% else %>
+      Qty: <%= select_tag(input_id, options_for_select(0..@giveaway.max_trees), disabled: true) %>
+      <div class="out-of-stock"> OUT OF STOCK </div>
+    <% end %>
+  </div>
+<%= tree.description.html_safe %></td>
   </tr></table>
   </div>
   <% end %>
@@ -173,7 +177,7 @@ function onClickValidate(f){
 }
 
 function validateEmail(){
-  if (/@/.test($( '#request_email' ))) {
+  if (/@/.test($( '#request_email' ).val())) {
     return true;
   } else {
     alert("Please enter a valid email address.");
