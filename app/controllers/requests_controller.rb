@@ -105,7 +105,7 @@ class RequestsController < ApplicationController
     rp[:tree] = tree_ref1
     rp[:tree2_id] = tree2_id
     
-    unless rp[:different_address] == "1"
+    unless rp[:different_address]
       rp[:planting_street1] = rp[:mailing_street1]
       rp[:planting_street2] = rp[:mailing_street2]
       rp[:planting_city] = rp[:mailing_city]
