@@ -7,11 +7,6 @@
 
 Verify the new Su has :id == 1.
 
-* Initialize the confirmation page text in the rails console:
-> StoredText.new(name:"confirmation").save
-
-Verify the new StoredText has :id == 1.
-
 * Add the following API keys to the development and production sections of config/secrets.yml
 
   gmail_username: 'user@gmail.com'
