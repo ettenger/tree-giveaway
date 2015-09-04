@@ -79,9 +79,13 @@ class GiveawaysController < ApplicationController
 
     def giveaway_params_with_trees
       gp = giveaway_params
-      tree_ids = gp[:trees].reject(&:blank?)
-      tree_refs = Tree.find(tree_ids)
-      gp[:trees] = tree_refs
+      
+      if gp[:trees]
+        tree_ids = gp[:trees].reject(&:blank?)
+        tree_refs = Tree.find(tree_ids)
+        gp[:trees] = tree_refs
+      end
+      
       gp
     end
 
