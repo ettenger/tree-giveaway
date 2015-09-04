@@ -96,10 +96,11 @@
     </tr>
     <tr>
       <td colspan=2>
+	<div id="diff-addy">
 	<%= f.label :different_address, label: "* Are you planting somewhere other than your mailing address?" %>
 	<br>
-	<%= f.input :different_address, as: :radio_buttons,
-			label: false %></td>
+	<%= f.input :different_address, as: :radio_buttons, label: false %></td>
+        </div>
     </tr>
  
     <tr class="separator" colspan="2"></tr>
@@ -173,7 +174,17 @@
 <script>
 
 function onClickValidate(f){
-  return validateTrees(f) && validatePhila() && validateEmail();
+  return validateTrees(f) && validatePhila() && validateEmail() && validateDiffAddy();
+}
+
+function validateDiffAddy(){
+  if ($( '#request_different_address_false' ).is(':checked') || $( '#request_different_address_false' ).is(':checked') ) {
+    return true;
+  } else {
+    $( '#diff-addy' ).css('background-color', 'red');
+    $( '#diff-addy' ).append("<div id='diff-addy-error'>can't be blank</div>");
+    return false;
+  }
 }
 
 function validateEmail(){
@@ -221,6 +232,11 @@ if(numTrees === 0) {
 }
 
 $("input[name='request\\[different_address\\]']").change(function() {
+    if ($( '#diff-addy-error' ).length) {
+      $( '#diff-addy' ).css('background-color', 'white');
+      $( '#diff-addy-error' ).remove();
+    }
+    
     if ($("input[name='request\\[different_address\\]']:checked").val() === 'true') {
       $( '#plantingAddress' ).removeClass('hidden');
     } else {
