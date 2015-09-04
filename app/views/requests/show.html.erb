@@ -1,3 +1,6 @@
 <p id="notice"><%= notice %></p>
 <%= render 'conf' %>
+<div class="back-button">
 <%= link_to 'Back', giveaway_path(@request.giveaway) %>
+</div>
+<%= render :partial => 'requests/share_buttons' %>

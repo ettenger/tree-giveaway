@@ -1,0 +1,31 @@
+<% content_for :head do %>
+<!--  <meta property="og:url" content="<%= giveaway_url(@request.giveaway_id) %>" />
+  <meta property="og:type"          content="website" />
+  <meta property="og:title"         content="<%= @request.giveaway.name %>" />
+  <meta property="og:description"   content="I just reserved <%= @request.tree_names %> from TreePhilly!" />
+  <meta property="og:image"         content="<%= image_url('main-logo.png') %>" />
+..>
+
+<!--
+  <% if @request.tree.image_file_name %>  
+    <meta property="og:image"         content="<%= @request.tree.image.url(:medium) %>" />
+  <% end %>
+-->
+<% end %>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="share-buttons">
+<div class="fb-button-wrapper">
+  <div class="fb-share-button" data-href="<%= giveaway_url(@request.giveaway_id) %>" data-layout="button"></div>
+</div>
+<div class="tweet-wrapper">
+  <a href="https://twitter.com/share" class="twitter-share-button" data-url="<%= giveaway_url(@request.giveaway_id) %>" data-text="I just reserved <%= @request.tree_names %>!" data-via="TreePhilly" data-count="none">Tweet</a>
+</div>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</div>

@@ -5,3 +5,29 @@
 .container {
   display: table;
 }
+
+.main-body {
+  padding-bottom: 20px;
+}
+
+.back-button {
+  display: block;
+  width: 768px;
+  text-align: left;
+  margin-top: 4px;
+  margin-left: auto;
+  margin-right: auto;
+}  
+
+.share-buttons {
+  display: block;
+  width: 140px;
+  padding-bottom: 40px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.fb-button-wrapper, .tweet-wrapper {
+  float: left;
+  margin-right: 10px;
+}

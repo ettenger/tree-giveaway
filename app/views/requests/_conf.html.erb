@@ -1,5 +1,5 @@
 <table class="container" width="770" border="0" cellpadding="5" cellspacing="5">
-<tr><td>
+<tr><td class="main-body">
 <div id="logos">
 <%= link_to image_tag("main-logo.png"), "http://treephilly.org/", :target => "_blank" %>
 <%= link_to image_tag("parks-rec-logo.png"), "http://www.phila.gov/parksandrecreation/Pages/default.aspx", :target => "_blank" %>
@@ -33,5 +33,6 @@ Donate</a> to support TreePhilly</p>
   <br><br>
 
   <strong>Tree(s) reserved: </strong><%= @request.tree_names %>
+  <br>
   </td></tr>
 </table>
