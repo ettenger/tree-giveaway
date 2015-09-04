@@ -98,14 +98,14 @@ class RequestsController < ApplicationController
 
     if tree_request1[1] == "2"
       tree2_id = tree_ref1.id
-    elsif tree_request2[1] == "1"
+    elsif tree_request2 && tree_request2[1] == "1"
       tree2_id = tree_request2[0].to_i
     end
 
     rp[:tree] = tree_ref1
     rp[:tree2_id] = tree2_id
     
-    unless rp[:different_address]
+    unless rp[:different_address] == "true"
       rp[:planting_street1] = rp[:mailing_street1]
       rp[:planting_street2] = rp[:mailing_street2]
       rp[:planting_city] = rp[:mailing_city]
