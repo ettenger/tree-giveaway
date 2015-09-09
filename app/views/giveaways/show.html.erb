@@ -142,7 +142,7 @@
   <div class="tree-info">
     <strong><%= tree.name %></strong>  
   <table class="tree-img-desc"><tr>
-  <td><%= image_tag tree.image.url(:medium) if tree.image_file_name %></td>
+  <td class="tree-image"><%= image_tag tree.image.url(:medium) if tree.image_file_name %></td>
   <td>
   <div id="add-tree">
     <% input_id = "request[tree][#{tree.id.to_s}]" %>
