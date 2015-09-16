@@ -17,7 +17,8 @@ class GiveawaysController < ApplicationController
 
   # GET /giveaways/new
   def new
-    @giveaway = Giveaway.new
+    defaults = {:max_trees => 2}
+    @giveaway = Giveaway.new(defaults)
     @trees = Tree.all
   end
 

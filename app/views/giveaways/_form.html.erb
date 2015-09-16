@@ -49,7 +49,7 @@
   </div>
   <div class="field">
     <%= f.label :max_trees, "Maximum number of trees per request" %><br>
-    <%= f.number_field :max_trees, value: 2, size: 1, in:1..2 %>
+    <%= f.number_field :max_trees, size: 1, in:1..2 %>
   </div>  
   <div class="field">
     <%= f.label :tree_limit, "Maximum number of trees that can be reserved in total (leave blank for no limit)" %><br>
