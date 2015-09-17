@@ -1,4 +1,4 @@
-<% content_for :title, @giveaway.name %>
+B<% content_for :title, @giveaway.name %>
 <p id="notice"><%= notice %></p>
 
 <table class="container" width="770" border="0" cellpadding="5" cellspacing="5">
@@ -226,7 +226,11 @@ if(numTrees === 0) {
  alert("Please select a tree.");
  return false;
 } else if (numTrees > <%= @giveaway.max_trees %>) {
- alert("You may only request a total of two trees.");
+  <% if @giveaway.max_trees == 2 %>
+     alert("You may only request a total of two trees.");
+  <% else %>
+     alert("You may only request one tree.");
+  <% end %>
  return false;
 } else { return true; }
 }
