@@ -54,12 +54,11 @@ class Request < ActiveRecord::Base
 
   def self.to_csv(options = {})
     CSV.generate(options) do |csv|
-      columns = %w(first_name last_name email phone_number tree_name tree2_name mailing_street1 mailing_street2 mailing_city mailing_state mailing_zip planting_street1 planting_street2 planting_city planting_state planting_zip giveaway_name referral)
+      columns = %w(first_name last_name email phone_number tree_name tree2_name mailing_street1 mailing_street2 mailing_city mailing_state mailing_zip planting_street1 planting_street2 planting_city planting_state planting_zip giveaway_name referral created_at)
       methods = columns.map(&:to_sym)
       csv << columns
       all.each do |request|
-        col_vals = methods.each.map { |method| method.to_proc.call(request) }
-        csv << col_vals.map { |value| value.gsub(/\n/, " ") if value}
+        csv << methods.each.map { |method| method.to_proc.call(request) }
       end
     end
   end
