@@ -1,8 +1,12 @@
 class RequestsController < ApplicationController
   require 'csv'
 
+  include ActiveModel::Dirty
+  define_attribute_methods :tree, :tree2, :tree_id, :tree2_id
+
+
   before_filter :check_session, :only => [:show]
-  before_filter :auth, :only => [:destroy, :index]  
+  before_filter :auth, :only => [:destroy, :index, :edit, :update]  
 
   def create
     
@@ -35,6 +39,51 @@ class RequestsController < ApplicationController
         format.html { redirect_to Giveaway.find(request_params[:giveaway_id]), notice: @request.errors }
       end
     end
+  end
+
+  def edit
+    name_will_change!
+    @request = Request.find(params[:id])
+    @trees = @request.giveaway.trees
+    @requested_trees = [@request.tree_id, @request.tree2_id]
+  end
+
+  def update
+    respond_to do |format|
+      if @request.update(tree_params)
+        if @request.tree_id_was
+          @tree_old = @request.tree_was
+          @tree_old.stock += 1
+          @tree_old.save
+        end
+
+        if @request.tree2_id_was
+          @tree2_old = @request.tree2_was
+          @tree2_old.stock += 1
+          @tree2_old.save
+        end
+
+        if @requst.tree_id
+          @tree = @request.tree
+          @tree.stock -= 1
+          @tree.save
+        end
+
+        if @request.tree2_id
+          @tree2 = @request.tree2
+          @tree2.stock -= 1
+          @tree2.save
+        end
+        
+        changes_applied
+
+        format.html { redirect_to @request, notice: 'Request was successfully updated.' }
+        format.json { render :show, status: :ok, location: @request }
+      else
+        format.html { render :edit }
+        format.json { render json: @tree.errors, status: :unprocessable_entity }
+      end
+    end 
   end
 
   def destroy
