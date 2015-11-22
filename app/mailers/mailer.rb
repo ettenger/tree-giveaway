@@ -3,7 +3,9 @@ class Mailer < ApplicationMailer
 
   def conf_email(request)
     @request = request
-    mail(to: @request.email, subject: 'Tree Philly Confirmation')
+    mail(to: @request.email,
+         reply_to: 'TreePhilly@phila.gov',
+         subject: 'Tree Philly Confirmation')
   end
 
 end
