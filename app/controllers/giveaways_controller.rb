@@ -17,7 +17,8 @@ class GiveawaysController < ApplicationController
 
   # GET /giveaways/new
   def new
-    defaults = {:max_trees => 2}
+    defaults = {:max_trees => 2,
+                :referral => "Newspaper\nFlyer\nEmail\nSocial media (Facebook, Twitter, Instagram)\nOnline search\nBlog post\nTreePhilly website\nWord of mouth\nI am a return participant\nOther"}
     @giveaway = Giveaway.new(defaults)
     @trees = Tree.all
   end
@@ -75,7 +76,7 @@ class GiveawaysController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def giveaway_params
-      params.require(:giveaway).permit(:name, :description, :description2, :location, :time, :end_time, :max_trees, :tree_limit, :close_time, :confirmation_text, {:trees => []})
+      params.require(:giveaway).permit(:name, :description, :description2, :location, :time, :end_time, :max_trees, :tree_limit, :close_time, :confirmation_text, :referral, {:trees => []})
     end
 
     def giveaway_params_with_trees

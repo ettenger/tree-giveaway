@@ -161,7 +161,7 @@
 <hr>
   <div class="referral-area">
   <%= f.label :referral, label: "How did you hear about the TreePhilly Yard Tree Giveaways?" %><br>
-  <% referral_options = ["Newspaper", "Flyer", "Email", "Social media (Facebook, Twitter, Instagram)", "Online search", "Blog post", "TreePhilly website", "Word of mouth", "I am a return participant", "Other"] %>
+  <% referral_options = @giveaway.referral.strip().split("\n") %>
   <%= f.input :referral, label: false, collection: referral_options, wrapper_html: { id: 'referral-div' } %>
   <br>
   <%= f.button :submit, "Request your tree" %>
