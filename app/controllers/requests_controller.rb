@@ -42,13 +42,17 @@ class RequestsController < ApplicationController
   end
 
   def edit
-    name_will_change!
+    tree_will_change!
+    tree2_will_change!
+    tree_id_will_change!
+    tree2_id_will_change!
+
     @request = Request.find(params[:id])
     @trees = @request.giveaway.trees
-    @requested_trees = [@request.tree_id, @request.tree2_id]
   end
 
   def update
+    @request = Request.find(params[:id])
     respond_to do |format|
       if @request.update(tree_params)
         if @request.tree_id_was
@@ -134,6 +138,27 @@ class RequestsController < ApplicationController
                                     :mailing_street1, :mailing_street2, :mailing_city, :mailing_state, :mailing_zip,
                                     :planting_street1, :planting_street2, :planting_city, :planting_state, :planting_zip,
                                     :different_address, :referral, :giveaway_id, :session_id, :tree => tree_ids)
+  end
+
+  def tree_params
+    rp = request_params
+    sorted_tree_requests = rp[:tree].sort_by { |k, v| v}.reverse
+    tree_request1 = sorted_tree_requests[0]
+    tree_request2 = sorted_tree_requests[1]
+
+    tree_ref1 = Tree.find(tree_request1[0])
+    tree2_id = nil
+
+    if tree_request1[1] == "2"
+      tree2_id = tree_ref1.id
+    elsif tree_request2 && tree_request2[1] == "1"
+      tree2_id = tree_request2[0].to_i
+    end
+
+    rp[:tree] = tree_ref1
+    rp[:tree2_id] = tree2_id
+
+    rp
   end
 
   def request_params_with_tree_and_addy

@@ -27,6 +27,7 @@
         <td><%= simple_format(request.mailing_address, {}, wrapper_tag: "div") %></td>
         <td><%= simple_format(request.planting_address, {}, wrapper_tag: "div") %></td>
         <td><%= link_to 'Show', request %></td>
+        <td><%= link_to 'Edit', "/requests/#{request.id}/edit" %></td>
         <td><%= link_to 'Destroy', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

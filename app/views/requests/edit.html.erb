@@ -1,0 +1,48 @@
+<h1>Editing Request # <%= @request.id %></h1>
+<h2><%= @request.giveaway.name %></h2>
+<h2><%= @request.name %></h2>
+
+<%= form_for(@request) do |f| %>
+  <% if @request.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@request.errors.count, "error") %> prohibited this request from being updated:</h2>
+
+      <ul>
+      <% @request.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div style="text-decoration:underline;">Trees requested</div>
+  <% @trees.each do |tree| %>
+  <div class="tree-info">
+    <strong><%= tree.name %></strong>  
+  <table class="tree-img-desc"><tr>
+  <td class="tree-image"><%= image_tag tree.image.url(:medium) if tree.image_file_name %></td>
+  <td>
+  <div id="add-tree">
+    <% trees_requested = 0 %>
+    <% trees_requested += 1 if tree.id == @request.tree_id %>
+    <% trees_requested += 1 if tree.id == @request.tree2_id %>
+    <% input_id = "request[tree][#{tree.id.to_s}]" %>
+    <% if tree.stock > 0 %>
+      Qty: <%= select_tag(input_id, options_for_select(0..2, trees_requested), class:"tree-count") %> 
+      <div> <%= tree.stock %> Remaining </div>
+    <% else %>
+      Qty: <%= select_tag(input_id, options_for_select(0..2, trees_requested)) %>
+      <div class="out-of-stock"> OUT OF STOCK </div>
+    <% end %>
+  </div>
+  <%= tree.description.html_safe %></td>
+  </tr></table>
+  </div>
+  <% end %>
+
+  <%= f.hidden_field :giveaway_id, :value => @request.giveaway_id %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
