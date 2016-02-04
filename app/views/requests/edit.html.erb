@@ -41,6 +41,8 @@
   <% end %>
 
   <%= f.hidden_field :giveaway_id, :value => @request.giveaway_id %>
+  <%= f.hidden_field :old_tree_id, :value => @old_tree_id %>
+  <%= f.hidden_field :old_tree2_id, :value => @old_tree2_id %>
 
   <div class="actions">
     <%= f.submit %>

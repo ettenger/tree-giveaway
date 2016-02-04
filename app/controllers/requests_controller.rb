@@ -1,10 +1,6 @@
 class RequestsController < ApplicationController
   require 'csv'
 
-  include ActiveModel::Dirty
-  define_attribute_methods :tree, :tree2, :tree_id, :tree2_id
-
-
   before_filter :check_session, :only => [:show]
   before_filter :auth, :only => [:destroy, :index, :edit, :update]  
 
@@ -42,45 +38,45 @@ class RequestsController < ApplicationController
   end
 
   def edit
-    tree_will_change!
-    tree2_will_change!
-    tree_id_will_change!
-    tree2_id_will_change!
-
     @request = Request.find(params[:id])
     @trees = @request.giveaway.trees
+    @old_tree_id = @request.tree_id
+    @old_tree2_id = @request.tree2_id
   end
 
   def update
     @request = Request.find(params[:id])
     respond_to do |format|
-      if @request.update(tree_params)
-        if @request.tree_id_was
-          @tree_old = @request.tree_was
+     tp = tree_params
+     old_tree_id =  tp.delete("old_tree_id")
+     old_tree2_id =  tp.delete("old_tree2_id")
+     @tree = tp[:tree]
+     tree2_id = tp[:tree2_id]
+
+     if @request.update(tp)
+        if old_tree_id
+          @tree_old = Tree.find(old_tree_id)
           @tree_old.stock += 1
           @tree_old.save
         end
 
-        if @request.tree2_id_was
-          @tree2_old = @request.tree2_was
+        if old_tree2_id
+          @tree2_old = Tree.find(old_tree2_id)
           @tree2_old.stock += 1
           @tree2_old.save
         end
 
-        if @requst.tree_id
-          @tree = @request.tree
+        if @tree
           @tree.stock -= 1
           @tree.save
         end
 
-        if @request.tree2_id
-          @tree2 = @request.tree2
+        if tree2_id
+          @tree2 = Tree.find(tree2_id)
           @tree2.stock -= 1
           @tree2.save
         end
         
-        changes_applied
-
         format.html { redirect_to @request, notice: 'Request was successfully updated.' }
         format.json { render :show, status: :ok, location: @request }
       else
@@ -137,7 +133,8 @@ class RequestsController < ApplicationController
     params.require(:request).permit(:first_name, :last_name, :email, :phone_number, 
                                     :mailing_street1, :mailing_street2, :mailing_city, :mailing_state, :mailing_zip,
                                     :planting_street1, :planting_street2, :planting_city, :planting_state, :planting_zip,
-                                    :different_address, :referral, :giveaway_id, :session_id, :tree => tree_ids)
+                                    :different_address, :referral, :giveaway_id, :session_id, :old_tree_id, :old_tree2_id,
+                                    :tree => tree_ids)
   end
 
   def tree_params
