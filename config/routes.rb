@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :logos
 #  get 'stored_text/edit'
 
 #  get 'stored_text/update'
