@@ -1,10 +1,9 @@
 <table class="container" width="770" border="0" cellpadding="5" cellspacing="5">
 <tr><td class="main-body">
 <div id="logos">
-<%= link_to image_tag("main-logo.png"), "http://treephilly.org/", :target => "_blank" %>
-<%= link_to image_tag("parks-rec-logo.png"), "http://www.phila.gov/parksandrecreation/Pages/default.aspx", :target => "_blank" %>
-<%= link_to image_tag("fpclogo.jpg"), "http://myphillypark.org/", :target => "_blank" %>
-<%= link_to image_tag("top-wf-logo.jpg"), "https://www.wellsfargo.com/", :target => "_blank" %>
+<% @request.giveaway.logos.each do |logo| %>
+  <%= link_to image_tag(logo.image.url, alt: logo.name), logo.link, :target => "_blank" %>
+<% end %>
 </div>
 <strong>
 <%= Time.now.strftime("%B %-d, %Y") %><br><br><br>

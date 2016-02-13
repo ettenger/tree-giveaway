@@ -14,8 +14,6 @@ class GiveawaysController < ApplicationController
     session[:init] = true
     @giveaway = Giveaway.find(params[:id])
     @request = Request.new
-    @logos = [@giveaway.logo1_id, @giveaway.logo2_id, @giveaway.logo3_id, @giveaway.logo4_id,
-              @giveaway.logo5_id, @giveaway.logo6_id].reject(&:blank?).map { |logo_id| Logo.find(logo_id) }
   end
 
   # GET /giveaways/new

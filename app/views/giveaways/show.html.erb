@@ -4,7 +4,7 @@
 <table class="container" width="770" border="0" cellpadding="5" cellspacing="5">
 <tr><td width="770" valign="top">
 <div id="logos">
-<% @logos.each do |logo| %>
+<% @giveaway.logos.each do |logo| %>
   <%= link_to image_tag(logo.image.url, alt: logo.name), logo.link, :target => "_blank" %>
 <% end %>
 </div>

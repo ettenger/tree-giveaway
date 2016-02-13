@@ -31,28 +31,9 @@ class Giveaway < ActiveRecord::Base
     Time.now > self.end_time
   end
 
-  def logo1
-    Logo.find(self.logo1_id) if self.logo1_id
-  end
-
-  def logo2
-    Logo.find(self.logo2_id) if self.logo2_id
-  end
-
-  def logo3
-    Logo.find(self.logo3_id) if self.logo3_id
-  end
-
-  def logo4
-    Logo.find(self.logo4_id) if self.logo4_id
-  end
-
-  def logo5
-    Logo.find(self.logo5_id) if self.logo5_id
-  end
-
-  def logo6
-    Logo.find(self.logo6_id) if self.logo6_id
+  def logos
+    [self.logo1_id, self.logo2_id, self.logo3_id, self.logo4_id,
+       self.logo5_id, self.logo6_id].reject(&:blank?).map { |logo_id| Logo.find(logo_id) }
   end
 
 end
