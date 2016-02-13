@@ -12,7 +12,10 @@ class GiveawaysController < ApplicationController
   # GET /giveaways/1.json
   def show
     session[:init] = true
+    @giveaway = Giveaway.find(params[:id])
     @request = Request.new
+    @logos = [@giveaway.logo1_id, @giveaway.logo2_id, @giveaway.logo3_id, @giveaway.logo4_id,
+              @giveaway.logo5_id, @giveaway.logo6_id].reject(&:blank?).map { |logo_id| Logo.find(logo_id) }
   end
 
   # GET /giveaways/new
@@ -21,11 +24,13 @@ class GiveawaysController < ApplicationController
                 :referral => "Newspaper\nFlyer\nEmail\nSocial media (Facebook, Twitter, Instagram)\nOnline search\nBlog post\nTreePhilly website\nWord of mouth\nI am a return participant\nOther"}
     @giveaway = Giveaway.new(defaults)
     @trees = Tree.all
+    @logos = Logo.all
   end
 
   # GET /giveaways/1/edit
   def edit
     @trees = Tree.all
+    @logos = Logo.all
   end
 
   # POST /giveaways
@@ -76,7 +81,10 @@ class GiveawaysController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def giveaway_params
-      params.require(:giveaway).permit(:name, :description, :description2, :location, :time, :end_time, :max_trees, :tree_limit, :close_time, :confirmation_text, :referral, {:trees => []})
+      params.require(:giveaway).permit(:name, :description, :description2,
+                                       :logo1_id, :logo2_id, :logo3_id, :logo4_id, :logo5_id, :logo6_id,
+                                       :location, :time, :end_time, :max_trees, :tree_limit,
+                                       :close_time, :confirmation_text, :referral, {:trees => []})
     end
 
     def giveaway_params_with_trees

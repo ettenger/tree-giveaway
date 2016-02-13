@@ -14,6 +14,32 @@
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
+  <h3>Select Logos</h3>
+  <div class="field">
+    <%= f.label :logo1_id, "Logo #1" %>
+    <%= f.select :logo1_id, @logos.collect {|logo| [ logo.name, logo.id ] }, { include_blank: true } %>
+  </div>
+  <div class="field">
+    <%= f.label :logo2_id, "Logo #2" %>
+    <%= f.select :logo2_id, @logos.collect {|logo| [ logo.name, logo.id ] }, { include_blank: true } %>
+  </div>
+  <div class="field">
+    <%= f.label :logo3_id, "Logo #3" %>
+    <%= f.select :logo3_id, @logos.collect {|logo| [ logo.name, logo.id ] }, { include_blank: true } %>
+  </div>
+  <div class="field">
+    <%= f.label :logo4_id, "Logo #4" %>
+    <%= f.select :logo4_id, @logos.collect {|logo| [ logo.name, logo.id ] }, { include_blank: true } %>
+  </div>
+  <div class="field">
+    <%= f.label :logo5_id, "Logo #5" %>
+    <%= f.select :logo5_id, @logos.collect {|logo| [ logo.name, logo.id ] }, { include_blank: true } %>
+  </div>
+  <div class="field">
+    <%= f.label :logo6_id, "Logo #6" %>
+    <%= f.select :logo6_id, @logos.collect {|logo| [ logo.name, logo.id ] }, { include_blank: true } %>
+  </div>
+
   <div class="field">
     <%= f.label :description %><br>
     <%= f.cktext_area :description %>

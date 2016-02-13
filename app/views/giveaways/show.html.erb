@@ -4,10 +4,9 @@
 <table class="container" width="770" border="0" cellpadding="5" cellspacing="5">
 <tr><td width="770" valign="top">
 <div id="logos">
-<%= link_to image_tag("main-logo.png"), "http://treephilly.org/", :target => "_blank" %>
-<%= link_to image_tag("parks-rec-logo.png"), "http://www.phila.gov/parksandrecreation/Pages/default.aspx", :target => "_blank" %>
-<%= link_to image_tag("fpclogo.jpg"), "http://myphillypark.org/", :target => "_blank" %>
-<%= link_to image_tag("top-wf-logo.jpg"), "https://www.wellsfargo.com/", :target => "_blank" %>
+<% @logos.each do |logo| %>
+  <%= link_to image_tag(logo.image.url, alt: logo.name), logo.link, :target => "_blank" %>
+<% end %>
 </div>
 <h2 align="center"><%= @giveaway.name %></h2>
 <h3 align="center"><%= @giveaway.time.strftime("%A, %B %d, %Y, %-I:%M %P") %>
