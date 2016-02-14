@@ -2,7 +2,7 @@ class RequestsController < ApplicationController
   require 'csv'
 
   before_filter :check_session, :only => [:show]
-  before_filter :auth, :only => [:destroy, :index, :edit, :update]  
+  before_filter :auth, :only => [:destroy, :index, :edit, :update, :delete_all]
 
   def create
     
@@ -123,6 +123,12 @@ class RequestsController < ApplicationController
 
   def show
     @request = Request.find(params[:id])
+  end
+
+  def delete_all
+    Request.delete_all
+    flash[:notice] = "You have removed all requests!"
+    redirect_to su_home_path
   end
 
   private

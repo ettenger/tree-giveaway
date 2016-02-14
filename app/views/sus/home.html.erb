@@ -3,6 +3,8 @@
 <%= link_to 'View/edit Giveaways', giveaways_path %><br>
 <%= link_to 'View/edit Trees', trees_path %><br>
 <%= link_to 'Add Logos', logos_path %><br>
-<p>Download a <%= link_to 'CSV of all requests', controller: "requests", action: "index", id: "all", format: "csv" %></p><br>
-
+<p>Download a <%= link_to 'CSV of all requests', controller: "requests", action: "index", id: "all", format: "csv" %></p>
+<p>End of season ONLY -- <%= link_to 'Delete all requests', delete_all_requests_path, method: :get, data: { confirm: 'Are you sure?' } %></td>
+</p>
+<br>
 <%= link_to 'Logout', logout_path %>

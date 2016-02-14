@@ -20,6 +20,11 @@ Rails.application.routes.draw do
   get 'su/home', to: 'sus#home', as: :su_home
 
 #  get 'request/show'
+  resources :requests do
+    collection do
+      get 'delete_all'
+    end
+  end
 
   resources :giveaways
   resources :trees
