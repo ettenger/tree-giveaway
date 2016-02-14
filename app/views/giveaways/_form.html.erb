@@ -54,15 +54,15 @@
   </div>
   <div class="field">
     <%= f.label :time, "Start time" %><br>
-    <%= f.datetime_select :time %>
+    <%= f.datetime_select :time, start_hour: 6, end_hour: 22, ampm: true, minute_step: 15 %>
   </div>
   <div class="field">
     <%= f.label :end_time %><br>
-    <%= f.datetime_select :end_time %>
+    <%= f.datetime_select :end_time, start_hour: 6, end_hour: 22, ampm: true, minute_step: 15 %>
   </div>
   <div class="field">
     <%= f.label :close_time, "Registration close time" %><br>
-    <%= f.datetime_select :close_time %>
+    <%= f.datetime_select :close_time, start_hour: 6, end_hour: 22, ampm: true, minute_step: 15 %>
   </div>
   <div style="text-decoration:underline;">Trees available</div>
   <div class="field">
