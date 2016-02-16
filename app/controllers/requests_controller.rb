@@ -50,7 +50,7 @@ class RequestsController < ApplicationController
      tp = tree_params
      old_tree_id =  tp.delete("old_tree_id")
      old_tree2_id =  tp.delete("old_tree2_id")
-     @tree = tp[:tree]
+     tree_id = tp[:tree].id
      tree2_id = tp[:tree2_id]
 
      if @request.update(tp)
@@ -66,7 +66,8 @@ class RequestsController < ApplicationController
           @tree2_old.save
         end
 
-        if @tree
+        if tree_id
+          @tree = Tree.find(tree_id)
           @tree.stock -= 1
           @tree.save
         end
