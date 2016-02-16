@@ -23,6 +23,12 @@
     <%= f.label :stock %><br>
     <%= f.number_field :stock%>
   </div>
+  <% if @show_original_stock %>
+    <div class="field">
+      <%= f.label :original_stock %><br>
+      <%= f.number_field :original_stock%>
+    </div>
+  <% end %>
   <div class="field">
     <%= f.label :image %><br>
     <%= f.file_field :image%>

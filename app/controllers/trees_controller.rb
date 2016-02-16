@@ -20,6 +20,7 @@ class TreesController < ApplicationController
 
   # GET /trees/1/edit
   def edit
+    @show_original_stock = true
   end
 
   # POST /trees
