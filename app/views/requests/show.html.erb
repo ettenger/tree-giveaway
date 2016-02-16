@@ -4,3 +4,8 @@
 <%= link_to 'Back', giveaway_path(@request.giveaway) %>
 </div>
 <%= render :partial => 'requests/share_buttons' %>
+
+<% if notice == 'Request was successfully updated.' %>
+  <br>
+  <%= link_to 'Admin Homepage', su_home_path %>
+<% end %>

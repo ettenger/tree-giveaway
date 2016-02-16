@@ -54,25 +54,25 @@ class RequestsController < ApplicationController
      tree2_id = tp[:tree2_id]
 
      if @request.update(tp)
-        if old_tree_id
+        unless old_tree_id.blank?
           @tree_old = Tree.find(old_tree_id)
           @tree_old.stock += 1
           @tree_old.save
         end
 
-        if old_tree2_id
+        unless old_tree2_id.blank?
           @tree2_old = Tree.find(old_tree2_id)
           @tree2_old.stock += 1
           @tree2_old.save
         end
 
-        if tree_id
+        unless tree_id.blank?
           @tree = Tree.find(tree_id)
           @tree.stock -= 1
           @tree.save
         end
 
-        if tree2_id
+        unless tree2_id.blank?
           @tree2 = Tree.find(tree2_id)
           @tree2.stock -= 1
           @tree2.save
