@@ -258,4 +258,8 @@ $('#request_referral').change(function() {
     $('#request_referral').attr('name', 'request[referral]');
   }
 });
+
+$(document).ready(function() {
+  $("a[href^='http']").attr('target','_blank');
+});
 </script>
