@@ -54,19 +54,19 @@
     <tbody id="contact">
     <tr>
       <td width="200"><%= f.label :first_name %></td>
-      <td><%= f.input :first_name, label: false %></td>
+      <td><%= f.input :first_name, label: false, input_html: {maxlength: 25, size: 22} %></td>
     </tr>
     <tr>
       <td><%= f.label :last_name %></td>
-      <td><%= f.input :last_name, label: false %></td>
+      <td><%= f.input :last_name, label: false, input_html: {maxlength: 30, size: 22} %></td>
     </tr>
     <tr>
       <td><%= f.label :email %></td>
-      <td><%= f.input :email, as: :email, label: false %></td>
+      <td><%= f.input :email, as: :email, label: false, input_html: {maxlength: 50, size: 22} %></td>
     </tr>
     <tr>
       <td><%= f.label :phone_number %></td>
-      <td><%= f.input :phone_number, as: :tel, label: false %></td>
+      <td><%= f.input :phone_number, as: :tel, label: false, input_html: {maxlength: 22, size: 22} %></td>
     </tr>
     <tr><td><br></td><td></td></tr>
     </tbody>
@@ -77,23 +77,23 @@
     </tr>
     <tr>
       <td><%= f.label :mailing_street1, label: "Address" %></td>
-      <td><%= f.input :mailing_street1, label: false %></td>
+      <td><%= f.input :mailing_street1, label: false, input_html: {maxlength: 75, size: 22} %></td>
     </tr>
     <tr>
       <td><%= f.label :mailing_street2, label: "Address (line 2)" %></td>
-      <td><%= f.input :mailing_street2, label: false %></td>
+      <td><%= f.input :mailing_street2, label: false, input_html: {maxlength: 75, size: 22} %></td>
     </tr>
     <tr>
       <td><%= f.label :mailing_city, label: "City" %></td>
-      <td><%= f.input :mailing_city, label: false %></td>
+      <td><%= f.input :mailing_city, label: false, input_html: {maxlength: 20, size: 22} %></td>
     </tr>
     <tr>
       <td><%= f.label :mailing_state, label: "State" %></td>
-      <td><%= f.input :mailing_state, label: false %></td>
+      <td><%= f.input :mailing_state, label: false, input_html: {maxlength: 30, size: 22} %></td>
     </tr>
     <tr>
       <td><%= f.label :mailing_zip, label: "Zip code" %></td>
-      <td><%= f.input :mailing_zip, label: false %></td>
+      <td><%= f.input :mailing_zip, label: false, input_html: {maxlength: 10, size: 22} %></td>
     </tr>
     <tr>
       <td colspan=2>
@@ -113,23 +113,23 @@
     </tr>
     <tr>
       <td><%= f.label :planting_street1, label: "Address" %></td>
-      <td><%= f.input :planting_street1, label: false, validate: false %></td>
+      <td><%= f.input :planting_street1, label: false, validate: false, input_html: {maxlength: 75, size: 22} %></td>
     </tr>
     <tr>
       <td><%= f.label :planting_street2, label: "Address (line 2)" %></td>
-      <td><%= f.input :planting_street2, label: false %></td>
+      <td><%= f.input :planting_street2, label: false, input_html: {maxlength: 75, size: 22} %></td>
     </tr>
     <tr>
       <td><%= f.label :planting_city, label: "City" %></td>
-      <td><%= f.input :planting_city, label: false, validate: false %></td>
+      <td><%= f.input :planting_city, label: false, validate: false, input_html: {maxlength: 13, size: 22} %></td>
     </tr>
     <tr>
       <td><%= f.label :planting_state, label: "State" %></td>
-      <td><%= f.input :planting_state, label: false, validate: false %></td>
+      <td><%= f.input :planting_state, label: false, validate: false, input_html: {maxlength: 30, size: 22} %></td>
     </tr>
     <tr>
       <td><%= f.label :planting_zip, label: "Zip code" %></td>
-      <td><%= f.input :planting_zip, label: false, validate: false %></td>
+      <td><%= f.input :planting_zip, label: false, validate: false, input_html: {maxlength: 10, size: 22} %></td>
     </tr>
     </tbody>
   </table>
