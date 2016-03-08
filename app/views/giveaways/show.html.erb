@@ -147,7 +147,7 @@
   <td>
   <div id="add-tree">
     <% input_id = "request[tree][#{tree.id.to_s}]" %>
-    <% if tree.stock > 0 %>
+    <% if tree.stock && tree.stock > 0 %>
       Qty: <%= select_tag(input_id, options_for_select(0..@giveaway.max_trees), class:"tree-count") %> 
       <div> <%= tree.stock %> Remaining </div>
     <% else %>

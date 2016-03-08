@@ -4,7 +4,7 @@ class Giveaway < ActiveRecord::Base
   has_many :logos
 
   def trees_remaining
-    self.trees.map(&:stock).reduce(&:+)
+    self.trees.select {|tree| tree.stock }.map(&:stock).reduce(&:+)
   end
 
   def out_of_stock?
