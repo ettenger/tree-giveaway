@@ -1,5 +1,5 @@
 class GiveawaysController < ApplicationController
-  before_filter :auth, only: [:index, :new, :edit, :update, :destroy, :create]
+  before_filter :auth, only: [:index, :new, :edit, :update, :destroy, :create, :duplicate]
   before_action :set_giveaway, only: [:show, :edit, :update, :destroy]
   before_action :set_trees_and_logos, only: [:new, :edit, :duplicate]
 

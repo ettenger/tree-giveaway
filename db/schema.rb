@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160202220534) do
+ActiveRecord::Schema.define(version: 20160309002349) do
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string   "data_file_name",               null: false
@@ -43,11 +43,28 @@ ActiveRecord::Schema.define(version: 20160202220534) do
     t.datetime "close_time"
     t.text     "confirmation_text"
     t.text     "referral"
+    t.integer  "logo1_id"
+    t.integer  "logo2_id"
+    t.integer  "logo3_id"
+    t.integer  "logo4_id"
+    t.integer  "logo5_id"
+    t.integer  "logo6_id"
   end
 
   create_table "giveaways_trees", id: false, force: :cascade do |t|
     t.integer "tree_id",     null: false
     t.integer "giveaway_id", null: false
+  end
+
+  create_table "logos", force: :cascade do |t|
+    t.string   "name"
+    t.string   "link"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "requests", force: :cascade do |t|
@@ -100,6 +117,7 @@ ActiveRecord::Schema.define(version: 20160202220534) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.integer  "original_stock"
+    t.integer  "order"
   end
 
 end

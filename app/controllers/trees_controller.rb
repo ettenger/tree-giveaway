@@ -71,12 +71,13 @@ class TreesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tree_params
-      params.require(:tree).permit(:name, :description, :stock, :original_stock, :image)
+      params.require(:tree).permit(:name, :description, :stock, :original_stock, :image, :order)
     end
 
     def tree_params_with_original_stock
       tp = tree_params
       tp[:original_stock] = tree_params[:stock]
+      tp[:order] = Tree.count + 1
       tp
     end
   
