@@ -26,6 +26,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :giveaways do
+    member do
+      get 'duplicate'
+    end
+  end
+
   resources :giveaways
   resources :trees
   resources :requests

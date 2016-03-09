@@ -1,6 +1,7 @@
 class GiveawaysController < ApplicationController
   before_filter :auth, only: [:index, :new, :edit, :update, :destroy, :create]
   before_action :set_giveaway, only: [:show, :edit, :update, :destroy]
+  before_action :set_trees_and_logos, only: [:new, :edit, :duplicate]
 
   # GET /giveaways
   # GET /giveaways.json
@@ -12,7 +13,6 @@ class GiveawaysController < ApplicationController
   # GET /giveaways/1.json
   def show
     session[:init] = true
-    @giveaway = Giveaway.find(params[:id])
     @request = Request.new
   end
 
@@ -21,14 +21,17 @@ class GiveawaysController < ApplicationController
     defaults = {:max_trees => 2,
                 :referral => "Newspaper\nFlyer\nEmail\nSocial media (Facebook, Twitter, Instagram)\nOnline search\nBlog post\nTreePhilly website\nWord of mouth\nI am a return participant\nOther"}
     @giveaway = Giveaway.new(defaults)
-    @trees = Tree.all
-    @logos = Logo.all
+  end
+
+  def duplicate
+    @original = Giveaway.find(params[:id])
+    @giveaway = @original.dup
+    @giveaway.trees = @original.trees
+    render 'new'
   end
 
   # GET /giveaways/1/edit
   def edit
-    @trees = Tree.all
-    @logos = Logo.all
   end
 
   # POST /giveaways
@@ -75,6 +78,11 @@ class GiveawaysController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_giveaway
       @giveaway = Giveaway.find(params[:id])
+    end
+
+    def set_trees_and_logos
+      @trees = Tree.all
+      @logos = Logo.all
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

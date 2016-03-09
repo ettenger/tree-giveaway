@@ -24,7 +24,7 @@
 <h2 align="center">This event has already taken place.</h2>
 <% elsif @giveaway.closed? %>
 <h2 align="center">Registration is closed for this event.</h2>
-<% elsif @giveaway.out_of_stock? %>
+<% elsif @giveaway.trees.any? && @giveaway.out_of_stock? %>
 <h2 align="center">All available trees have been reserved.</h2>
 <% elsif @giveaway.full? %>
 <h2 align="center">This event has reached its capacity.</h2>
@@ -171,7 +171,7 @@
 <% end %>
 </td></tr></table>
 
-<% if notice == 'Giveaway was successfully updated.' %>
+<% if notice == 'Giveaway was successfully updated.' || notice == 'Giveaway was successfully created.' %>
   <br>
   <%= link_to 'Admin Homepage', su_home_path %>
 <% end %>
