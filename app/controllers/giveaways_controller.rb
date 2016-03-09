@@ -81,7 +81,7 @@ class GiveawaysController < ApplicationController
     end
 
     def set_trees_and_logos
-      @trees = Tree.all
+      @trees = Tree.order(:order)
       @logos = Logo.all
     end
 

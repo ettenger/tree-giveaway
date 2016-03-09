@@ -139,7 +139,7 @@
   <strong style="text-decoration:underline;">Select your tree(s):</strong>
   <%= @giveaway.description2.html_safe %>
 
-  <% @giveaway.trees.each do |tree| %>
+  <% @giveaway.trees.order(:order).each do |tree| %>
   <div class="tree-info">
     <strong><%= tree.name %></strong>  
   <table class="tree-img-desc"><tr>
