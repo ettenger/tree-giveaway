@@ -14,6 +14,7 @@ class GiveawaysController < ApplicationController
   def show
     session[:init] = true
     @request = Request.new
+    @admin = true if auth?
   end
 
   # GET /giveaways/new
@@ -105,8 +106,12 @@ class GiveawaysController < ApplicationController
       gp
     end
 
+  def auth?
+    session.id == Su.find(1).session_id
+  end
+
   def auth
-    unless session.id == Su.find(1).session_id
+    unless auth?
       render :text => "You must be logged in to see this page", :status => 403
     end
   end
