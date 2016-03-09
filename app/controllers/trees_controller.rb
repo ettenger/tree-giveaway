@@ -1,11 +1,11 @@
 class TreesController < ApplicationController
   before_filter :auth
-  before_action :set_tree, only: [:show, :edit, :update, :destroy]
+  before_action :set_tree, only: [:show, :edit, :update, :update_order, :destroy]
 
   # GET /trees
   # GET /trees.json
   def index
-    @trees = Tree.all
+    @trees = Tree.order(:order)
   end
 
   # GET /trees/1
@@ -45,6 +45,18 @@ class TreesController < ApplicationController
     respond_to do |format|
       if @tree.update(tree_params)
         format.html { redirect_to @tree, notice: 'Tree was successfully updated.' }
+        format.json { render :show, status: :ok, location: @tree }
+      else
+        format.html { render :edit }
+        format.json { render json: @tree.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def update_order
+    respond_to do |format|
+      if @tree.update(tree_params)
+        format.html { redirect_to trees_url, notice: 'Tree was successfully updated.' }
         format.json { render :show, status: :ok, location: @tree }
       else
         format.html { render :edit }

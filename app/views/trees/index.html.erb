@@ -21,7 +21,12 @@
         <td><%= tree.name %></td>
 	<td><%= image_tag tree.image.url(:thumb) if tree.image_file_name %></td>
         <td><%= tree.description.html_safe %></td>
-	<td><%= select("tree[#{tree.id}]", "order", (0..Tree.count), {selected: tree.order, include_blank: true }) %></td>
+	<td style="text-align:center;">
+	  <%= form_for tree, as: :tree, url: update_order_tree_path(tree), method: :patch do |f| %>
+	    <%= f.select(:order, (0..Tree.count), {selected: tree.order, include_blank: true }) %>
+	    <%= f.submit "Update" %>
+	  <% end %>
+	</td>
         <td style="text-align:center;"><%= tree.stock %></td>
         <td style="text-align:center;"><%= tree.original_stock %></td>
         <td><%= link_to 'Show', tree %></td>

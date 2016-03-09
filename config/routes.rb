@@ -32,6 +32,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :trees do
+    member do
+      patch 'update_order'
+    end
+  end
+
   resources :giveaways
   resources :trees
   resources :requests
