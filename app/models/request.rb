@@ -41,7 +41,7 @@ class Request < ActiveRecord::Base
   end
 
   def giveaway_name
-    self.giveaway.name
+    self.giveaway.name if self.giveaway
   end
 
   def mailing_address
