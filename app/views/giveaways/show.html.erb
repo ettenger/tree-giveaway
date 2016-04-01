@@ -161,10 +161,12 @@
   <% end %>
 <hr>
   <div class="referral-area">
-  <%= f.label :referral, label: "How did you hear about the TreePhilly Yard Tree Giveaways?" %><br>
-  <% referral_options = @giveaway.referral.strip().split("\n") %>
-  <%= f.input :referral, label: false, collection: referral_options, wrapper_html: { id: 'referral-div' } %>
-  <br>
+  <% unless @giveaway.no_referral %>
+    <%= f.label :referral, label: "How did you hear about the TreePhilly Yard Tree Giveaways?" %><br>
+    <% referral_options = @giveaway.referral.strip().split("\n") %>
+    <%= f.input :referral, label: false, collection: referral_options, wrapper_html: { id: 'referral-div' } %>
+    <br>
+  <% end %>
   <%= f.button :submit, "Request your tree" %>
   </div>
 <% end %>
@@ -202,6 +204,9 @@ function validateEmail(){
 }
 
 function validatePhila(){
+<% if @giveaway.no_philly_validation %>
+  return true;
+<% else %>
   var phila = /^phila/i;
   if ($("input[name='request\\[different_address\\]']:checked").val() === 'true') {
     if (phila.test($( '#request_planting_city').val())) {
@@ -218,6 +223,7 @@ function validatePhila(){
       return false;
     }
   }
+<% end %>
 }
 
 function validateTrees(f){

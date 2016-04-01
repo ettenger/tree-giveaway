@@ -91,7 +91,8 @@ class GiveawaysController < ApplicationController
       params.require(:giveaway).permit(:name, :description, :description2,
                                        :logo1_id, :logo2_id, :logo3_id, :logo4_id, :logo5_id, :logo6_id,
                                        :location, :time, :end_time, :max_trees, :tree_limit,
-                                       :close_time, :confirmation_text, :referral, {:trees => []})
+                                       :close_time, :confirmation_text, :referral, :no_referral, 
+                                       :no_philly_validation, {:trees => []})
     end
 
     def giveaway_params_with_trees

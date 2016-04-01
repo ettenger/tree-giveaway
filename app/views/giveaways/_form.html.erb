@@ -89,6 +89,14 @@
     <%= f.label :referral, "Options for referrals (one per line; last should be 'Other')" %><br>
     <%= f.text_area :referral, cols: 60, rows: 12 %>
   </div>
+  <div class="field">
+    <%= f.label :no_referral, "Don't show referrals?" %><br>
+    <%= f.check_box :no_referral %>
+  </div>
+  <div class="field">
+    <%= f.label :no_philly_validation, "Don't validate requesters are in Philadelphia?" %><br>
+    <%= f.check_box :no_philly_validation %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
