@@ -13,27 +13,29 @@ class RequestsController < ApplicationController
       return
     end
       
+    @tree = @request.tree
+    @tree2 = @request.tree2 if @request.tree2_id
 
-    respond_to do |format|
-      if @request.save
-        @tree = @request.tree
-        @tree.stock -= 1
-        @tree.save
+    # Guard against reserving out of stock trees
+    if @tree.stock < 1 || @tree2 && (@tree2.stock < 1 || @tree == @tree2 && @tree.stock < 2)
+      redirect_to Giveaway.find(request_params[:giveaway_id]), notice: "Sorry, the tree you reqeusted is no longer available."
+      return
+    end
 
-        if @request.tree2_id
-          @tree2 = @request.tree2
-          @tree2.stock -= 1
-          @tree2.save
-        end
+    if @request.save
+      @tree.stock -= 1
+      @tree.save
 
-        Mailer.conf_email(@request).deliver_now
-        
-        format.html { redirect_to @request, notice: 'Your tree has been reserved.' }
-        format.json { render :show, status: :created, location: @request }
-      else
-        format.json { render json: @request.errors, status: :unprocessable_entity }
-        format.html { redirect_to Giveaway.find(request_params[:giveaway_id]), notice: @request.errors }
+      if @request.tree2_id
+        @tree2.stock -= 1
+        @tree2.save
       end
+
+      Mailer.conf_email(@request).deliver_now
+      
+      redirect_to @request, notice: 'Your tree has been reserved.'
+    else
+      redirect_to Giveaway.find(request_params[:giveaway_id]), notice: @request.errors
     end
   end
 
