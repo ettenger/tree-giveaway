@@ -162,7 +162,7 @@
 <hr>
   <div class="referral-area">
   <% unless @giveaway.no_referral %>
-    <%= f.label :referral, label: "How did you hear about the TreePhilly Yard Tree Giveaways?" %><br>
+    <%= f.label :referral, label: @giveaway.referral_question %><br>
     <% referral_options = @giveaway.referral.strip().split("\n") %>
     <%= f.input :referral, label: false, collection: referral_options, wrapper_html: { id: 'referral-div' } %>
     <br>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160401201206) do
+ActiveRecord::Schema.define(version: 20170410024012) do
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string   "data_file_name",               null: false
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 20160401201206) do
     t.integer  "logo6_id"
     t.boolean  "no_referral"
     t.boolean  "no_philly_validation"
+    t.text     "referral_question"
   end
 
   create_table "giveaways_trees", id: false, force: :cascade do |t|

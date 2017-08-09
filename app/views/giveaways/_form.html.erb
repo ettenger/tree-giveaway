@@ -86,6 +86,10 @@
     <%= f.cktext_area :confirmation_text %>
   </div>
   <div class="field">
+    <%= f.label :referral_question %><br>
+    <%= f.text_field :referral_question %>
+  </div>
+  <div class="field">
     <%= f.label :referral, "Options for referrals (one per line; last should be 'Other')" %><br>
     <%= f.text_area :referral, cols: 60, rows: 12 %>
   </div>
