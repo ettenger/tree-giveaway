@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
-<h2>Super-user login</h2>
+<h2>Admin login</h2>
 <%= form_for(@su, url:"/login") do |f| %>
   <%= f.label :password %><br>
   <%= f.password_field :password %>
   <%= f.hidden_field :session_id, :value => session.id %>
-  <%= f.submit %>
+  <%= f.submit "Login" %>
 <% end %>

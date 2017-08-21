@@ -89,6 +89,8 @@ Rails.application.configure do
     :enable_starttls_auto => true
   }
 
+  config.base_url = "http://giveaway.treephilly.org"
+
   Paperclip.options[:command_path] = "/usr/bin/"
 
   # Precompile assets

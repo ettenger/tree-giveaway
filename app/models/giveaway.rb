@@ -36,4 +36,34 @@ class Giveaway < ActiveRecord::Base
        self.logo5_id, self.logo6_id].reject(&:blank?).map { |logo_id| Logo.find(logo_id) }
   end
 
+  def url
+    "#{Rails.application.config.base_url}/giveaways/#{self.id}"
+  end
+
+  def valid_codes_arr
+    self.valid_codes.split(",")
+  end
+
+  def code_is_valid?(user_code)
+    self.valid_codes_arr.include? user_code
+  end
+
+  def code_is_used?(user_code)
+    self.used_codes.split(",").include? user_code
+  end
+
+  def use_code!(user_code)
+    self.valid_codes = self.valid_codes_arr.reject { |code| code == user_code }.join(",")
+    
+    if !self.used_codes
+      self.used_codes = user_code
+    else
+      self.used_codes += ",#{user_code}"
+    end
+  end
+
+  def valid_one_time_links
+    self.valid_codes_arr.map { |code| "#{self.url}?code=#{code}"}
+  end
+
 end
