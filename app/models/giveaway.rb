@@ -41,7 +41,19 @@ class Giveaway < ActiveRecord::Base
   end
 
   def valid_codes_arr
-    self.valid_codes.split(",")
+    if self.valid_codes
+      self.valid_codes.split(",")
+    else
+      []
+    end
+  end
+
+  def used_codes_arr
+    if self.used_codes
+      self.used_codes.split(",")
+    else
+      []
+    end
   end
 
   def code_is_valid?(user_code)
@@ -49,11 +61,7 @@ class Giveaway < ActiveRecord::Base
   end
 
   def code_is_used?(user_code)
-    if self.used_codes
-      self.used_codes.split(",").include? user_code
-    else
-      false
-    end
+    self.used_codes_arr.include? user_code
   end
 
   # don't forget to save after using

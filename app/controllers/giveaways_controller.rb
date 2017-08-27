@@ -1,6 +1,6 @@
 class GiveawaysController < ApplicationController
-  before_filter :auth, only: [:index, :new, :edit, :update, :destroy, :create, :duplicate]
-  before_action :set_giveaway, only: [:show, :edit, :update, :destroy]
+  before_filter :auth, only: [:index, :new, :edit, :update, :destroy, :create, :duplicate, :links]
+  before_action :set_giveaway, only: [:show, :edit, :update, :destroy, :links]
   before_action :set_trees_and_logos, only: [:new, :edit, :duplicate]
 
   # GET /giveaways
@@ -36,6 +36,10 @@ class GiveawaysController < ApplicationController
 
   # GET /giveaways/1/edit
   def edit
+  end
+
+  # GET /giveaways/1/links
+  def links
   end
 
   # POST /giveaways

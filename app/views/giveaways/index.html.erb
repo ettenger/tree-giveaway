@@ -10,7 +10,7 @@
       <th>Location</th>
       <th>Time</th>
       <th>Trees Available</th>
-      <th colspan="5"></th>
+      <th colspan="6"></th>
     </tr>
   </thead>
 
@@ -27,6 +27,7 @@
         <td><%= link_to 'Destroy', giveaway, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <td><%= link_to 'Duplicate', duplicate_giveaway_path(giveaway) %></td>
 	<td><%= link_to 'Show Requests', controller: "requests", action: "index", id: giveaway %></td>
+        <td><%= link_to 'Show Links', links_giveaway_path(giveaway) if giveaway.use_one_time_links %></td>
       </tr>
     <% end %>
   </tbody>

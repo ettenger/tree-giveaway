@@ -189,7 +189,7 @@
 <% if @admin %>
   <br>
   <% if @giveaway.use_one_time_links %>
-    <p>This giveaway requires a one time use link. <%= link_to 'See Links', su_home_path %></p>
+    <p>This giveaway requires a one time use link. <%= link_to 'See Links', links_giveaway_path(@giveaway) %></p>
   <% end %>
   <br>
   <%= link_to 'Admin Homepage', su_home_path %>
