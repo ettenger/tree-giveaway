@@ -49,7 +49,11 @@ class Giveaway < ActiveRecord::Base
   end
 
   def code_is_used?(user_code)
-    self.used_codes.split(",").include? user_code
+    if self.used_codes
+      self.used_codes.split(",").include? user_code
+    else
+      false
+    end
   end
 
   # don't forget to save after using

@@ -13,9 +13,10 @@ class GiveawaysController < ApplicationController
   # GET /giveaways/1.json
   def show
     session[:init] = true
-    @code = params[:code]
-    @request = Request.new
     @admin = true if auth?
+    @code = params[:code]
+    @show_giveaway =  !@giveaway.use_one_time_links || @admin || @giveaway.code_is_valid?(@code)
+    @request = Request.new
   end
 
   # GET /giveaways/new
