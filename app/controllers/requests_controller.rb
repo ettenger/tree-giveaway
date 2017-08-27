@@ -7,9 +7,10 @@ class RequestsController < ApplicationController
   def create
     
     @request = Request.new(request_params_with_tree_and_addy)
+    @giveaway = Giveaway.find(request_params[:giveaway_id])
 
     if Request.where(giveaway_id: @request.giveaway_id).map(&:planting_address).include? @request.planting_address
-      redirect_to Giveaway.find(request_params[:giveaway_id]), notice: "Tree not reserved. You may only make one request per planting address."
+      redirect_to @giveaway, notice: "Tree not reserved. You may only make one request per planting address."
       return
     end
       
@@ -18,7 +19,7 @@ class RequestsController < ApplicationController
 
     # Guard against reserving out of stock trees
     if @tree.stock < 1 || @tree2 && (@tree2.stock < 1 || @tree == @tree2 && @tree.stock < 2)
-      redirect_to Giveaway.find(request_params[:giveaway_id]), notice: "Sorry, the tree you reqeusted is no longer available."
+      redirect_to @giveaway, notice: "Sorry, the tree you reqeusted is no longer available."
       return
     end
 
@@ -29,6 +30,11 @@ class RequestsController < ApplicationController
       if @request.tree2_id
         @tree2.stock -= 1
         @tree2.save
+      end
+
+      if @request.one_time_link_code
+        @giveaway.use_code!(@request.one_time_link_code)
+        @giveaway.save
       end
 
       Mailer.conf_email(@request).deliver_now
@@ -139,7 +145,7 @@ class RequestsController < ApplicationController
   def request_params
     giveaway_id = params.require(:request).fetch(:giveaway_id)
     tree_ids = Giveaway.find(giveaway_id).trees.ids.map(&:to_s)
-    params.require(:request).permit(:first_name, :last_name, :email, :phone_number, 
+    params.require(:request).permit(:first_name, :last_name, :email, :phone_number, :one_time_link_code,
                                     :mailing_street1, :mailing_street2, :mailing_city, :mailing_state, :mailing_zip,
                                     :planting_street1, :planting_street2, :planting_city, :planting_state, :planting_zip,
                                     :different_address, :referral, :giveaway_id, :session_id, :old_tree_id, :old_tree2_id,

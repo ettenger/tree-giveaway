@@ -47,6 +47,7 @@
 
     <%= f.input :giveaway_id, as: :hidden, input_html: { value: @giveaway.id } %>
     <%= f.input :session_id, as: :hidden, input_html: { value: session.id } %>
+    <%= f.input :one_time_link_code, as: :hidden, input_html: { value: @code} %>
     
   <p>
     <strong style="text-decoration:underline;">Please enter your contact information:</strong>
