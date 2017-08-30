@@ -1,6 +1,6 @@
 class GiveawaysController < ApplicationController
-  before_filter :auth, only: [:index, :new, :edit, :update, :destroy, :create, :duplicate]
-  before_action :set_giveaway, only: [:show, :edit, :update, :destroy]
+  before_filter :auth, only: [:index, :new, :edit, :update, :destroy, :create, :duplicate, :links]
+  before_action :set_giveaway, only: [:show, :edit, :update, :destroy, :links]
   before_action :set_trees_and_logos, only: [:new, :edit, :duplicate]
 
   # GET /giveaways
@@ -13,8 +13,10 @@ class GiveawaysController < ApplicationController
   # GET /giveaways/1.json
   def show
     session[:init] = true
-    @request = Request.new
     @admin = true if auth?
+    @code = params[:code]
+    @show_giveaway =  !@giveaway.use_one_time_links || @admin || @giveaway.code_is_valid?(@code)
+    @request = Request.new
   end
 
   # GET /giveaways/new
@@ -36,10 +38,15 @@ class GiveawaysController < ApplicationController
   def edit
   end
 
+  # GET /giveaways/1/links
+  def links
+  end
+
   # POST /giveaways
   # POST /giveaways.json
   def create
     @giveaway = Giveaway.new(giveaway_params_with_trees)
+    @giveaway.set_random_codes! if @giveaway.use_one_time_links
 
     respond_to do |format|
       if @giveaway.save
@@ -55,6 +62,10 @@ class GiveawaysController < ApplicationController
   # PATCH/PUT /giveaways/1
   # PATCH/PUT /giveaways/1.json
   def update
+    if giveaway_params[:use_one_time_links] && !@giveaway.use_one_time_links
+      @giveaway.set_random_codes!
+    end
+
     respond_to do |format|
        if @giveaway.update(giveaway_params_with_trees)
         format.html { redirect_to @giveaway, notice: 'Giveaway was successfully updated.' }
@@ -89,11 +100,11 @@ class GiveawaysController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def giveaway_params
-      params.require(:giveaway).permit(:name, :description, :description2, :referral_question,
+      params.require(:giveaway).permit(:code, :name, :description, :description2, :referral_question,
                                        :logo1_id, :logo2_id, :logo3_id, :logo4_id, :logo5_id, :logo6_id,
                                        :location, :time, :end_time, :max_trees, :tree_limit,
                                        :close_time, :confirmation_text, :referral, :no_referral, 
-                                       :no_philly_validation, {:trees => []})
+                                       :no_philly_validation, :use_one_time_links, {:trees => []})
     end
 
     def giveaway_params_with_trees

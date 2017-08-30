@@ -101,6 +101,10 @@
     <%= f.label :no_philly_validation, "Don't validate requesters are in Philadelphia?" %><br>
     <%= f.check_box :no_philly_validation %>
   </div>
+  <div class="field">
+    <%= f.label :use_one_time_links, "Only allow reservations with one-time links" %><br>
+    <%= f.check_box :use_one_time_links %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

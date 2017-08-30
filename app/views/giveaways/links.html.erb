@@ -1,0 +1,16 @@
+<h2>Valid Links</h2>
+<ul>
+	<% @giveaway.valid_one_time_links.each do |link| %>
+		<li><%= link %></li>
+	<% end %>
+</ul>
+
+<h2>Used Codes</h2>
+<ul>
+	<% @giveaway.used_codes_arr.each do |code| %>
+		<li><%= code %></li>
+	<% end %>
+</ul>
+
+<br>
+ <%= link_to 'Admin Homepage', su_home_path %>

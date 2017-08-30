@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   resources :giveaways do
     member do
       get 'duplicate'
+      get 'links'
     end
   end
 
