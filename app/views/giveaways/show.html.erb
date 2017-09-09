@@ -277,11 +277,15 @@ $("input[name='request\\[different_address\\]']").change(function() {
 });
 
 $('#request_referral').change(function() {
-  if( $('#request_referral').val() === 'Other' ) {
+  $('#request_referral_other').remove();
+  var val = $('#request_referral').val().replace(/(\r\n|\n|\r)/gm,"");
+  if ( val === 'Other' ) {
     $('#referral-div').append(" <input type='text' id='request_referral_other' name='request[referral]'>");
     $('#request_referral').attr('name', 'ignored_referral');
+  } else if ( val === 'Realty Agent' ) {
+    $('#referral-div').append(" <input type='text' placeholder='Realtor name' id='request_referral_other' name='request[referral]'>");
+    $('#request_referral').attr('name', 'ignored_referral');
   } else {
-    $('#request_referral_other').remove();
     $('#request_referral').attr('name', 'request[referral]');
   }
 });
