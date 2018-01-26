@@ -72,9 +72,12 @@
       </tr>
       <tr>
         <td colspan=2>
-          <%= f.label :is_cell_phone, label: "Is this a cell phone number?" %>
-          <br>
-          <%= f.input :is_cell_phone, as: :radio_buttons, label: false %></td>
+          <div id="is-cell">
+            <%= f.label :is_cell_phone, label: "* Is this a cell phone number?" %>
+            <br>
+            <%= f.input :is_cell_phone, as: :radio_buttons, label: false %>
+          </div>
+        </td>
       </tr>
       <tr></tr>
       <tr><td><br></td><td></td></tr>
@@ -106,17 +109,21 @@
       </tr>
       <tr>
         <td colspan=2>
-  	<div id="diff-addy">
-  	<%= f.label :different_address, label: "* Are you planting somewhere other than your mailing address?" %>
-  	<br>
-  	<%= f.input :different_address, as: :radio_buttons, label: false %></td>
+          <div id="diff-addy">
+            <%= f.label :different_address, label: "* Are you planting somewhere other than your mailing address?" %>
+            <br>
+            <%= f.input :different_address, as: :radio_buttons, label: false %>
           </div>
+        </td>
       </tr>
       <tr>
         <td colspan=2>
-          <%= f.label :previously_attended, label: "Have you (or someone in your household) attended a TreePhilly Yard Tree Giveaway event in the past 5 years?" %>
-          <br>
-          <%= f.input :previously_attended, as: :radio_buttons, collection: ['Yes', 'No', 'I don\'t know'], label: false %></td>
+          <div id="prev-attend">
+            <%= f.label :previously_attended, label: "* Have you (or someone in your household) attended a TreePhilly Yard Tree Giveaway event in the past 5 years?" %>
+            <br>
+            <%= f.input :previously_attended, as: :radio_buttons, collection: ['Yes', 'No', 'I don\'t know'], label: false %>
+          </div>
+        </td>
       </tr>
    
       <tr class="separator" colspan="2"></tr>
@@ -211,7 +218,7 @@
 <script>
 
 function onClickValidate(f){
-  return validateTrees(f) && validatePhila() && validateEmail() && validateDiffAddy();
+  return validateTrees(f) && validatePhila() && validateEmail() && validateDiffAddy() && validateIsCell() && validatePrevAttend();
 }
 
 function validateDiffAddy(){
@@ -220,6 +227,26 @@ function validateDiffAddy(){
   } else {
     $( '#diff-addy' ).css('background-color', 'red');
     $( '#diff-addy' ).append("<div id='diff-addy-error'>can't be blank</div>");
+    return false;
+  }
+}
+
+function validateIsCell(){
+  if ($( '#request_is_cell_phone_true' ).is(':checked') || $( '#request_is_cell_phone_false' ).is(':checked') ) {
+    return true;
+  } else {
+    $( '#is-cell' ).css('background-color', 'red');
+    $( '#is-cell' ).append("<div id='diff-addy-error'>can't be blank</div>");
+    return false;
+  }
+}
+
+function validatePrevAttend(){
+  if ($( '#request_previously_attended_yes' ).is(':checked') || $( '#request_previously_attended_no' ).is(':checked') || $( '#request_previously_attended_i_dont_know' ).is(':checked') ) {
+    return true;
+  } else {
+    $( '#prev-attend' ).css('background-color', 'red');
+    $( '#prev-attend' ).append("<div id='diff-addy-error'>can't be blank</div>");
     return false;
   }
 }
