@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170827180201) do
+ActiveRecord::Schema.define(version: 20180126033640) do
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string   "data_file_name",               null: false
@@ -79,8 +79,8 @@ ActiveRecord::Schema.define(version: 20170827180201) do
     t.string   "email"
     t.integer  "tree_id"
     t.integer  "giveaway_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.string   "session_id"
     t.string   "phone_number"
     t.string   "mailing_street1"
@@ -97,6 +97,8 @@ ActiveRecord::Schema.define(version: 20170827180201) do
     t.text     "referral"
     t.integer  "tree2_id"
     t.string   "one_time_link_code"
+    t.boolean  "is_cell_phone"
+    t.string   "previously_attended"
   end
 
   create_table "stored_texts", force: :cascade do |t|

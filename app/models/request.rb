@@ -2,7 +2,7 @@ class Request < ActiveRecord::Base
   belongs_to :tree
   belongs_to :giveaway
 
-  validates :first_name, :last_name, :phone_number,
+  validates :first_name, :last_name, :phone_number, :is_cell_phone, :previously_attended,
             :mailing_street1, :mailing_city, :mailing_state, :mailing_zip,
             :planting_street1, :planting_city, :planting_state, :planting_zip,
             presence: true

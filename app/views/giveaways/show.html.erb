@@ -70,6 +70,13 @@
         <td><%= f.label :phone_number %></td>
         <td><%= f.input :phone_number, as: :tel, label: false, input_html: {maxlength: 22, size: 22} %></td>
       </tr>
+      <tr>
+        <td colspan=2>
+          <%= f.label :is_cell_phone, label: "Is this a cell phone number?" %>
+          <br>
+          <%= f.input :is_cell_phone, as: :radio_buttons, label: false %></td>
+      </tr>
+      <tr></tr>
       <tr><td><br></td><td></td></tr>
       </tbody>
       <tbody id="mailing-address">
@@ -104,6 +111,12 @@
   	<br>
   	<%= f.input :different_address, as: :radio_buttons, label: false %></td>
           </div>
+      </tr>
+      <tr>
+        <td colspan=2>
+          <%= f.label :previously_attended, label: "Have you (or someone in your household) attended a TreePhilly Yard Tree Giveaway event in the past 5 years?" %>
+          <br>
+          <%= f.input :previously_attended, as: :radio_buttons, collection: ['Yes', 'No', 'I don\'t know'], label: false %></td>
       </tr>
    
       <tr class="separator" colspan="2"></tr>
