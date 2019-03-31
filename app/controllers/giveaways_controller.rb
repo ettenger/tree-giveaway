@@ -103,7 +103,8 @@ class GiveawaysController < ApplicationController
       params.require(:giveaway).permit(:code, :name, :description, :description2, :referral_question,
                                        :logo1_id, :logo2_id, :logo3_id, :logo4_id, :logo5_id, :logo6_id,
                                        :location, :time, :end_time, :max_trees, :tree_limit,
-                                       :close_time, :confirmation_text, :referral, :no_referral, 
+                                       :close_time, :confirmation_text, :referral, :no_referral,
+                                       :require_referral, :ask_if_cell_phone, :ask_if_attended,
                                        :no_philly_validation, :use_one_time_links, {:trees => []})
     end
 

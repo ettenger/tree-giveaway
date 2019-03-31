@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180126040751) do
+ActiveRecord::Schema.define(version: 20190331173009) do
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string   "data_file_name",               null: false
@@ -55,6 +55,9 @@ ActiveRecord::Schema.define(version: 20180126040751) do
     t.boolean  "use_one_time_links"
     t.text     "valid_codes"
     t.text     "used_codes"
+    t.boolean  "ask_if_cell_phone"
+    t.boolean  "ask_if_attended"
+    t.boolean  "require_referral"
   end
 
   create_table "giveaways_trees", id: false, force: :cascade do |t|
