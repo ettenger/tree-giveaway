@@ -37,7 +37,11 @@ class RequestsController < ApplicationController
         @giveaway.save
       end
 
-      Mailer.conf_email(@request).deliver_now
+      begin
+        Mailer.conf_email(@request).deliver_now
+      rescue
+        puts "Email to #{@request.email} not sent"
+      end
       
       redirect_to @request, notice: 'Your tree has been reserved.'
     else
