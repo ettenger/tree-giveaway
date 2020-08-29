@@ -164,8 +164,9 @@
     <hr>
     <div class="timeslot-area">
       <%= f.label :timeslot, label: "Select a time to pickup" %><br>
-      <% timeslot_options = @giveaway.timeslots.strip().split("\n").map(&:strip) %>
-      <%= f.input :timeslot, label: false, collection: timeslot_options, wrapper_html: { id: 'timeslot-div' } %>
+      <% full_timeslots = @giveaway.full_timeslots %>
+      <% timeslot_options = @giveaway.timeslots_array.map { |o| ["#{o}#{full_timeslots.include?(o) ? ' (Full)' : ''}", o] } %>
+      <%= f.input :timeslot, label: false, collection: timeslot_options, disabled: full_timeslots, wrapper_html: { id: 'timeslot-div' } %>
     </div>
     <br>
   <% end %>

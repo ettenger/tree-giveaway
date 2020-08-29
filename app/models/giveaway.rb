@@ -92,4 +92,17 @@ class Giveaway < ActiveRecord::Base
     self.valid_codes = self.generate_random_codes(100).join(",")
   end
 
+  def timeslots_array
+    self.timeslots.strip().split("\n").map(&:strip)
+  end
+
+  def reservations_by_timeslot
+    self.requests.map(&:timeslot).group_by(&:itself).map { |k,v| [k, v.length] }.to_h
+  end
+
+  def full_timeslots
+    reservations_by_timeslot = self.reservations_by_timeslot
+    self.timeslots_array.select { |timeslot| reservations_by_timeslot[timeslot] && reservations_by_timeslot[timeslot] >= self.max_reservations_per_timeslot }
+  end
+
 end
