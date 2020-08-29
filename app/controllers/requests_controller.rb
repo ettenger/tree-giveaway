@@ -153,7 +153,7 @@ class RequestsController < ApplicationController
                                     :mailing_street1, :mailing_street2, :mailing_city, :mailing_state, :mailing_zip,
                                     :planting_street1, :planting_street2, :planting_city, :planting_state, :planting_zip,
                                     :different_address, :referral, :giveaway_id, :session_id, :old_tree_id, :old_tree2_id,
-                                    :is_cell_phone, :previously_attended,
+                                    :is_cell_phone, :previously_attended, :timeslot,
                                     :tree => tree_ids)
   end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190331173009) do
+ActiveRecord::Schema.define(version: 20200829152533) do
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string   "data_file_name",               null: false
@@ -34,8 +34,8 @@ ActiveRecord::Schema.define(version: 20190331173009) do
     t.text     "description"
     t.string   "location"
     t.datetime "time"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.text     "description2"
     t.datetime "end_time"
     t.integer  "max_trees"
@@ -58,6 +58,9 @@ ActiveRecord::Schema.define(version: 20190331173009) do
     t.boolean  "ask_if_cell_phone"
     t.boolean  "ask_if_attended"
     t.boolean  "require_referral"
+    t.boolean  "use_timeslots"
+    t.text     "timeslots"
+    t.integer  "max_reservations_per_timeslot"
   end
 
   create_table "giveaways_trees", id: false, force: :cascade do |t|
@@ -102,6 +105,7 @@ ActiveRecord::Schema.define(version: 20190331173009) do
     t.string   "one_time_link_code"
     t.boolean  "is_cell_phone"
     t.string   "previously_attended"
+    t.string   "timeslot"
   end
 
   create_table "stored_texts", force: :cascade do |t|

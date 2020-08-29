@@ -160,6 +160,15 @@
       </tbody>
     </table>
   <br>
+  <% if @giveaway.use_timeslots %>
+    <hr>
+    <div class="timeslot-area">
+      <%= f.label :timeslot, label: "Select a time to pickup" %><br>
+      <% timeslot_options = @giveaway.timeslots.strip().split("\n").map(&:strip) %>
+      <%= f.input :timeslot, label: false, collection: timeslot_options, wrapper_html: { id: 'timeslot-div' } %>
+    </div>
+    <br>
+  <% end %>
   <hr>
   <p>
     <strong style="text-decoration:underline;">Select your tree(s):</strong>
@@ -222,7 +231,7 @@
 <script>
 
 function onClickValidate(f){
-  return validateTrees(f) && validatePhila() && validateEmail() && validateDiffAddy() && validateIsCell() && validatePrevAttend() && validateReferral();
+  return validateTrees(f) && validatePhila() && validateEmail() && validateDiffAddy() && validateIsCell() && validatePrevAttend() && validateReferral() && validateTimeslot();
 }
 
 function validateDiffAddy(){
@@ -272,6 +281,20 @@ function validateReferral(){
     } else {
       $( '#request_referral' ).css('background-color', 'red');
       $( '#referral-div' ).append("<div id='diff-addy-error'>Please select one</div>");
+      return false;
+    }
+  <% end %>
+}
+
+function validateTimeslot(){
+  <% if !@giveaway.use_timeslots %>
+    return true;
+  <% else %>
+    if ($('#request_timeslot').val()) {
+      return true;
+    } else {
+      $( '#request_timeslot' ).css('background-color', 'red');
+      $( '#timeslot-div' ).append("<div>Please select one</div>");
       return false;
     }
   <% end %>
