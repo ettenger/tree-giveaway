@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-<%= render 'conf' %>
+<%= render partial: 'conf', locals: { show_full_donation_form: true } %>
 <div class="back-button">
 <%= link_to 'Back', giveaway_path(@request.giveaway) %>
 </div>

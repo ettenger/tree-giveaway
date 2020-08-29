@@ -9,10 +9,15 @@
 <%= Time.now.strftime("%B %-d, %Y") %><br><br><br>
 Dear <%= @request.first_name %>,</strong>
 <%= @request.giveaway.confirmation_text.html_safe %>
-<br><hr>
-<p style="text-align: center;">
-Please <a href="https://secure.qgiv.com/for/fpconserve/restriction/TreePhilly/" target="_blank" style="text-decoration: none; font-size: 1.2em; color: green; padding: 3px; border: 1px dotted black">
-Donate</a> to support TreePhilly</p>
+<br>
+
+  <% unless local_assigns[:show_full_donation_form] %>
+    <hr>
+    <p style="text-align: center;">
+    Please <a href="https://secure.qgiv.com/for/fpconserve/restriction/TreePhilly/" target="_blank" style="text-decoration: none; font-size: 1.2em; color: green; padding: 3px; border: 1px dotted black">
+    Donate</a> to support TreePhilly</p>
+  <% end %>
+
 <hr>
 <br>
 
@@ -37,5 +42,14 @@ Donate</a> to support TreePhilly</p>
 
   <strong>Tree(s) reserved: </strong><%= @request.tree_names %>
   <br>
+  <% if local_assigns[:show_full_donation_form] %>
+    <br>
+    <hr>
+    <p style="text-align: center;">
+    Thank you for helping TreePhilly grow our urban forest! If you would like to further support TreePhilly's work and contribute to the success of Philadelphia's ongoing Urban Forest Strategic Plan, please consider making a donation.
+    </p>
+    <div class="qgiv-embed-container" data-qgiv-embed="true" data-embed-id="58396" data-embed="https://secure.qgiv.com/for/treep/embed/58396/" data-width="564"></div>
+    <script>(function(w, d, s, id){var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) return;js = d.createElement(s); js.id = id;js.src = "https://secure.qgiv.com/resources/core/js/embed.js";fjs.parentNode.insertBefore(js, fjs);})(window, document, 'script', 'qgiv-embedjs');</script>
+  <% end %>
   </td></tr>
 </table>

@@ -31,3 +31,11 @@
   float: left;
   margin-right: 10px;
 }
+
+.qgiv-embed-container {
+  height: 100%;
+  
+  iframe {
+    height: 2500px;
+  }
+}
