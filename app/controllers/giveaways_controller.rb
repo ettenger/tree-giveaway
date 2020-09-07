@@ -107,6 +107,7 @@ class GiveawaysController < ApplicationController
                                        :close_time, :confirmation_text, :referral, :no_referral,
                                        :require_referral, :ask_if_cell_phone, :ask_if_attended,
                                        :use_timeslots, :timeslots, :max_reservations_per_timeslot,
+                                       :use_delivery, :max_delivery_registrations, :pickup_delivery_text,
                                        :no_philly_validation, :use_one_time_links, {:trees => []})
     end
 

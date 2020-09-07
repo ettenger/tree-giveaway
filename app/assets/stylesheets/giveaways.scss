@@ -123,3 +123,15 @@ img {
 .radio {
   margin-right: 8px;
 }
+
+button.btn-link {
+  background: none!important;
+  border: none;
+  padding: 0!important;
+  /*optional*/
+  font-family: inherit;
+  /*input has OS specific font-family*/
+  color: #069;
+  text-decoration: underline;
+  cursor: pointer;
+}

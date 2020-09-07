@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200829152533) do
+ActiveRecord::Schema.define(version: 20200903200447) do
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string   "data_file_name",               null: false
@@ -61,6 +61,9 @@ ActiveRecord::Schema.define(version: 20200829152533) do
     t.boolean  "use_timeslots"
     t.text     "timeslots"
     t.integer  "max_reservations_per_timeslot"
+    t.boolean  "use_delivery"
+    t.integer  "max_delivery_registrations"
+    t.text     "pickup_delivery_text"
   end
 
   create_table "giveaways_trees", id: false, force: :cascade do |t|
@@ -106,6 +109,7 @@ ActiveRecord::Schema.define(version: 20200829152533) do
     t.boolean  "is_cell_phone"
     t.string   "previously_attended"
     t.string   "timeslot"
+    t.boolean  "is_delivery"
   end
 
   create_table "stored_texts", force: :cascade do |t|

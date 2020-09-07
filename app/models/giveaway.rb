@@ -105,4 +105,13 @@ class Giveaway < ActiveRecord::Base
     self.timeslots_array.select { |timeslot| reservations_by_timeslot[timeslot] && reservations_by_timeslot[timeslot] >= self.max_reservations_per_timeslot }
   end
 
+  def is_delivery_available?
+    if !self.use_delivery
+      return false
+    end
+
+    delivery_requests = self.requests.select { |request| request.is_delivery }.count
+    delivery_requests < self.max_delivery_registrations
+  end
+
 end

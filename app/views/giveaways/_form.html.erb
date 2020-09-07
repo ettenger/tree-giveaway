@@ -86,6 +86,18 @@
     <%= f.cktext_area :confirmation_text %>
   </div>
   <div class="field">
+    <%= f.label :pickup_delivery_text, "Text for timeslots and/or delivery info" %><br>
+    <%= f.cktext_area :pickup_delivery_text %>
+  </div>
+  <div class="field">
+    <%= f.label :use_delivery, "Use delivery?" %><br>
+    <%= f.check_box :use_delivery %>
+  </div>
+  <div class="field">
+    <%= f.label :max_delivery_registrations, "Maximum number of reservations for delivery" %><br>
+    <%= f.number_field :max_delivery_registrations, size: 1, in:1..100 %>
+  </div> 
+  <div class="field">
     <%= f.label :use_timeslots, "Use timeslots?" %><br>
     <%= f.check_box :use_timeslots %>
   </div>

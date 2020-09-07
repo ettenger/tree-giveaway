@@ -160,14 +160,26 @@
       </tbody>
     </table>
   <br>
-  <% if @giveaway.use_timeslots %>
+  <% if @giveaway.use_timeslots || @giveaway.is_delivery_available? %>
     <hr>
-    <div class="timeslot-area">
-      <%= f.label :timeslot, label: "Select a time to pickup" %><br>
-      <% full_timeslots = @giveaway.full_timeslots %>
-      <% timeslot_options = @giveaway.timeslots_array.map { |o| ["#{o}#{full_timeslots.include?(o) ? ' (Full)' : ''}", o] } %>
-      <%= f.input :timeslot, label: false, collection: timeslot_options, disabled: full_timeslots, wrapper_html: { id: 'timeslot-div' } %>
-    </div>
+        <%= @giveaway.pickup_delivery_text.html_safe %>
+        <% if @giveaway.use_timeslots %>
+          <div class="timeslot-area hide-delivery">
+            <%= f.label :timeslot, label: "Select a time to pickup" %><br>
+            <% full_timeslots = @giveaway.full_timeslots %>
+            <% timeslot_options = @giveaway.timeslots_array.map { |o| ["#{o}#{full_timeslots.include?(o) ? ' (Full)' : ''}", o] } %>
+            <%= f.input :timeslot, label: false, collection: timeslot_options, disabled: full_timeslots, wrapper_html: { id: 'timeslot-div' } %>
+          </div>
+        <% end %>
+        <% if @giveaway.is_delivery_available? %>
+          <div class="timeslot-area">
+            <button class="btn-link hide-delivery" type="button" onclick="useDelivery()">Not able to pick up your tree? Get it delivered.</button>
+            <div class="show-delivery hidden">
+              <strong>Your tree will be delivered.</strong>
+              <div><button class="btn-link" type="button" onclick="cancelDelivery()">Pick up instead</button></div>
+            </div>
+          </div>
+        <% end %>
     <br>
   <% end %>
   <hr>
@@ -231,6 +243,19 @@
 
 <script>
 
+function useDelivery() {
+  $( '#request_timeslot' ).val('');
+  $( '.show-delivery' ).removeClass('hidden');
+  $( '.hide-delivery' ).addClass('hidden');
+  $( '#new_request' ).append( '<input type="hidden" value="true" name="request[is_delivery]" id="request_is_delivery">' );
+}
+
+function cancelDelivery() {
+  $( '.show-delivery' ).addClass('hidden');
+  $( '.hide-delivery' ).removeClass('hidden');
+  $( '#request_is_delivery' ).remove();
+}
+
 function onClickValidate(f){
   return validateTrees(f) && validatePhila() && validateEmail() && validateDiffAddy() && validateIsCell() && validatePrevAttend() && validateReferral() && validateTimeslot();
 }
@@ -291,7 +316,7 @@ function validateTimeslot(){
   <% if !@giveaway.use_timeslots %>
     return true;
   <% else %>
-    if ($('#request_timeslot').val()) {
+    if ($('#request_timeslot').val() || $('#request_is_delivery')) {
       return true;
     } else {
       $( '#request_timeslot' ).css('background-color', 'red');
