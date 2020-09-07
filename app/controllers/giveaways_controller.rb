@@ -23,6 +23,7 @@ class GiveawaysController < ApplicationController
   def new
     defaults = {:max_trees => 2,
                 :timeslots => "2-3 pm\r\n3-4 pm",
+                :pickup_delivery_text => "How would you like to receive your tree?",
                 :referral_question => "How did you hear about the TreePhilly Yard Tree Giveaways?",
                 :referral => "Newspaper\nFlyer\nEmail\nSocial media (Facebook, Twitter, Instagram)\nOnline search\nBlog post\nTreePhilly website\nWord of mouth\nI am a return participant\nOther"}
     @giveaway = Giveaway.new(defaults)
