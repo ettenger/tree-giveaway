@@ -122,9 +122,9 @@
         <tr>
           <td colspan=2>
             <div id="prev-attend">
-              <%= f.label :previously_attended, label: "* Have you (or someone in your household) attended a TreePhilly Yard Tree Giveaway event in the past 5 years?" %>
+              <%= f.label :previously_attended, label: "Do you need assistance planting your tree?" %>
               <br>
-              <%= f.input :previously_attended, as: :radio_buttons, collection: ['Yes', 'No', 'I don\'t know'], label: false %>
+              <%= f.input :previously_attended, as: :radio_buttons, collection: ['Yes', 'No'], label: false %>
             </div>
           </td>
         </tr>
@@ -257,7 +257,7 @@ function cancelDelivery() {
 }
 
 function onClickValidate(f){
-  return validateTrees(f) && validatePhila() && validateEmail() && validateDiffAddy() && validateIsCell() && validatePrevAttend() && validateReferral() && validateTimeslot();
+  return validateTrees(f) && validatePhila() && validateEmail() && validateDiffAddy() && validateIsCell() && validateReferral() && validateTimeslot();
 }
 
 function validateDiffAddy(){
@@ -279,20 +279,6 @@ function validateIsCell(){
     } else {
       $( '#is-cell' ).css('background-color', 'red');
       $( '#is-cell' ).append("<div id='diff-addy-error'>can't be blank</div>");
-      return false;
-    }
-  <% end %>
-}
-
-function validatePrevAttend(){
-  <% if !@giveaway.ask_if_attended %>
-    return true;
-  <% else %>
-    if ($( '#request_previously_attended_yes' ).is(':checked') || $( '#request_previously_attended_no' ).is(':checked') || $( '#request_previously_attended_i_dont_know' ).is(':checked') ) {
-      return true;
-    } else {
-      $( '#prev-attend' ).css('background-color', 'red');
-      $( '#prev-attend' ).append("<div id='diff-addy-error'>can't be blank</div>");
       return false;
     }
   <% end %>
